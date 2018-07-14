@@ -17,7 +17,7 @@ class LoginScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            selectedPage: true
+            selectedPage: props.selectedPage
         }
     }
 
@@ -60,7 +60,7 @@ const tabs = (state: boolean, title: string) => {
 const LoginPage = (state: boolean) => {
     if (state) {
         return (
-            <CardBox>
+            <CardBox key='login'>
                 <InputComponent placeholder='Username' icon='email' secure={false} />
                 <InputComponent placeholder='Password' icon='lock' secure={true} />
                 <ButtonComponent name='SIGN IN' function='test' />
@@ -68,7 +68,7 @@ const LoginPage = (state: boolean) => {
         )
     } else {
         return (
-            <CardBox>
+            <CardBox key='register'>
                 <InputComponent placeholder='Name' icon='person' secure={false} />
                 <InputComponent placeholder='Username' icon='email' secure={false} />
                 <InputComponent placeholder='Password' icon='lock' secure={true} />
