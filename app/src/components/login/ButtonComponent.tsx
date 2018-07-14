@@ -4,11 +4,13 @@ import { Button } from 'react-native-elements'
 
 export interface Props {
     name: string
+    color: string
     function: any
 }
 
 interface State {
     name: string,
+    color: string,
     function: any
 }
 
@@ -18,14 +20,19 @@ export default class ButtonComponent extends React.Component<Props, State> {
 
         this.state = {
             name: props.name,
-            function: 'hello'
+            color: props.color,
+            function: props.function
         }
     }
 
     render() {
         return (
             <View style={styles.constainer}>
-                <Button title={this.state.name} buttonStyle={styles.buttonStyle}  fontSize={14} />
+                <Button title={this.state.name}
+                    buttonStyle={styles.buttonStyle}
+                    backgroundColor={this.state.color}
+                    onPress={this.state.function}
+                    fontSize={14} />
             </View>
         )
     }
@@ -38,7 +45,6 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         width: '100%',
-        borderRadius: 5,
-        backgroundColor: '#aacf68'
+        borderRadius: 5
     }
 })

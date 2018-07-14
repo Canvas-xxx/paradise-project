@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import CardBox from '../../components/login/CardBox'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
@@ -17,7 +18,8 @@ class LoginScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            selectedPage: props.selectedPage
+            // selectedPage: props.selectedPage
+            selectedPage: true
         }
     }
 
@@ -63,7 +65,10 @@ const LoginPage = (state: boolean) => {
             <CardBox key='login'>
                 <InputComponent placeholder='Username' icon='email' secure={false} />
                 <InputComponent placeholder='Password' icon='lock' secure={true} />
-                <ButtonComponent name='SIGN IN' function='test' />
+                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {}} />
+                <TouchableOpacity style={{marginTop: 15}} onPress={() => {Actions.forgot()}}>
+                    <Text style={{fontSize: 12, color: '#33502e'}}>Forgot your password?</Text>
+                </TouchableOpacity>
             </CardBox>
         )
     } else {
@@ -73,7 +78,7 @@ const LoginPage = (state: boolean) => {
                 <InputComponent placeholder='Username' icon='email' secure={false} />
                 <InputComponent placeholder='Password' icon='lock' secure={true} />
                 <InputComponent placeholder='Confirm Password' icon='lock' secure={true} />
-                <ButtonComponent name='SIGN UP' function='test' />
+                <ButtonComponent name='SIGN UP' color='#aacf68' function={() => {}} />
             </CardBox>
         )
     }

@@ -7,14 +7,15 @@ import React from 'react'
 import { Component } from 'react';
 import { View } from 'react-native';
 import LoginScreen from './app/src/screens/login/LoginScreen'
+import RouterComponent from './app/src/router'
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
-      <View>
-        <LoginScreen selectedPage={true} />
-      </View>
+      // <View>
+      //   <LoginScreen selectedPage={true} />
+      // </Viewz>
+      <RouterComponent />
     );
   }
 }
