@@ -12,12 +12,12 @@ interface State {
 }
 
 const mockData: any[] = [
-    { image: null, name: 'John Lennon' },
-    { image: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg', name: 'John Henry' },
-    { image: null, name: 'John Mayor' },
-    { image: null, name: 'John Colson' },
-    { image: null, name: 'John Park' },
-    { image: null, name: 'John Henderson' }
+    { id: 'sdmsopkdm123', image: null, name: 'John Lennon' },
+    { id: 'sdmsopkdm123', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg', name: 'John Henry' },
+    { id: 'sdmsopkdm123', image: null, name: 'John Mayor' },
+    { id: 'sdmsopkdm123', image: null, name: 'John Colson' },
+    { id: 'sdmsopkdm123', image: null, name: 'John Park' },
+    { id: 'sdmsopkdm123', image: null, name: 'John Henderson' }
 ]
 
 class HomeScreen extends React.Component<Props, State> {
@@ -46,7 +46,7 @@ const renderItems = (items: any[]) => {
     return (
         items.map( (item, index) => {
             return (
-                <ItemCardComponent key={index} image={item.image} name={item.name} />
+                <ItemCardComponent key={index} image={item.image} name={item.name} id={item.id} />
             )
         } )
     )

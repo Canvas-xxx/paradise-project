@@ -1,9 +1,11 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-elements'
+import { Actions } from 'react-native-router-flux'
 
 export interface Props {
     image: any,
+    id: string,
     name: string
 }
 
@@ -42,7 +44,7 @@ class ItemCardComponent extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.cardBox} activeOpacity={.8}>
+                <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({id: this.props.id})}}>
                     {renderAvartar(this.state.image, this.state.title)}
                     <Text style={styles.cardText}>{this.state.name}</Text>
                 </TouchableOpacity>
