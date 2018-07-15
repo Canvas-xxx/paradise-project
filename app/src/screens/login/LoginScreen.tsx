@@ -65,7 +65,7 @@ const LoginPage = (state: boolean) => {
             <CardBox key='login'>
                 <InputComponent placeholder='Username' icon='email' secure={false} />
                 <InputComponent placeholder='Password' icon='lock' secure={true} />
-                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {}} />
+                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {Actions.main()}} />
                 <TouchableOpacity style={{marginTop: 15}} onPress={() => {Actions.forgot()}}>
                     <Text style={{fontSize: 12, color: '#33502e'}}>Forgot your password?</Text>
                 </TouchableOpacity>
