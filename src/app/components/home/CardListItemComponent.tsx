@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 export interface Props {
     details: any
@@ -20,12 +21,12 @@ class CardListItemComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={() => {Actions.trackingDetail()}} >
                 <View style={styles.bodyContain}>
-                    <Text style={styles.titleText}>{this.state.details.process}</Text>
-                    <Text style={styles.detailText}>{this.state.details.time}</Text>
+                    <Text style={styles.titleText}>LAST STATE</Text>
+                    <Text style={styles.detailText}>TIME</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -34,13 +35,9 @@ const styles = StyleSheet.create({
     container: {
         flexBasis: '90%',
         backgroundColor: 'white',
-        // borderRadius: 15,
-        // borderBottomWidth: 2,
-        // borderColor: '#639c45',
         shadowColor: 'black',
         shadowOpacity: .2,
         shadowOffset: { width: 1, height: 5 },
-        // shadowRadius: 15,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',

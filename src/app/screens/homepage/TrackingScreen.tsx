@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import TrackingCardComponent from '../../components/home/TrackingCardComponent'
 import CardListItemComponent from '../../components/home/CardListItemComponent'
 
@@ -8,16 +8,13 @@ export interface Props {
 }
 
 interface State {
-    id: string,
-    name: string,
-    identifyId: string,
-    dob: string
+    id: string
 }
 
 const object: any[] = [
-    { id: 'index1', process: 'Start on the route', time: '07.30 am' },
-    { id: 'index2', process: 'On the route', time: '07.45 am' },
-    { id: 'index3', process: 'End the route', time: '08.00 am' }
+    { id: 'index1' },
+    { id: 'index2' },
+    { id: 'index3' }
 ]
 
 class TrackingScreen extends React.Component<Props, State> {
@@ -25,10 +22,7 @@ class TrackingScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            id: props.id,
-            name: 'John Lennon',
-            identifyId: '1101406066762',
-            dob: '11 Aug 1998'
+            id: props.id
         }
     }
 
@@ -36,7 +30,7 @@ class TrackingScreen extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <View style={styles.cardContain}>
-                    <TrackingCardComponent name={this.state.name} identifyId={this.state.identifyId} dob={this.state.dob} />
+                    <TrackingCardComponent details={object} />
                 </View>
                 <View style={styles.listContain}>
                     {renderList(object)}

@@ -3,15 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { Avatar } from 'react-native-elements'
 
 export interface Props {
-    name: string,
-    identifyId: string,
-    dob: any
+    details: any
 }
 
 interface State {
-    name: string,
-    identifyId: string,
-    dob: any
+    details: any
 }
 
 class TrackingCardComponent extends React.Component<Props, State> {
@@ -19,9 +15,7 @@ class TrackingCardComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            name: props.name,
-            identifyId: props.identifyId,
-            dob: props.dob
+            details: props.details
         }
     }
 
@@ -37,16 +31,20 @@ class TrackingCardComponent extends React.Component<Props, State> {
                     </View>
                     <View style={styles.rightSide}>
                         <View style={styles.textContain}>
-                            <Text style={styles.rightTitle}>ID No.:</Text>
-                            <Text style={styles.rightDetail}>{this.state.identifyId}</Text>
+                            <Text style={styles.rightTitle}>School Name: </Text>
+                            <Text style={styles.rightDetail}>SCHOOL NAME</Text>
                         </View>
                         <View style={styles.textContain}>
-                            <Text style={styles.rightTitle}>Name:</Text>
-                            <Text style={styles.rightDetail}>{this.state.name}</Text>
+                            <Text style={styles.rightTitle}>Student ID: </Text>
+                            <Text style={styles.rightDetail}>STUDENT ID</Text>
                         </View>
                         <View style={styles.textContain}>
-                            <Text style={styles.rightTitle}>D.O.B:</Text>
-                            <Text style={styles.rightDetail}>{this.state.dob}</Text>
+                            <Text style={styles.rightTitle}>Student Name: </Text>
+                            <Text style={styles.rightDetail}>STUDENT NAME</Text>
+                        </View>
+                        <View style={styles.textContain}>
+                            <Text style={styles.rightTitle}>Class: </Text>
+                            <Text style={styles.rightDetail}>CLASS</Text>
                         </View>
                     </View>
                 </View>

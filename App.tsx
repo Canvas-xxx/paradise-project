@@ -5,7 +5,7 @@
 
 import React from 'react'
 import { Component } from 'react';
-import RouterComponent from './app/src/router'
+import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
 
 export default class App extends Component {
