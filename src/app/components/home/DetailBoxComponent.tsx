@@ -18,7 +18,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>SCHOOL NAME</Text>
+                    <Text style={styles.textTitle}>SCHOOL NAME</Text>
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>TEACHER NAME</Text>
@@ -30,6 +30,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>BUS NUMBER</Text>
+                    <Text style={styles.textContain}>TIME</Text>
                     <Text style={styles.textContain}>STATUS</Text>
                 </View>
             </View>
@@ -57,7 +58,15 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 5
+    },
+    textTitle: {
+        flex: 1,
+        textAlign: 'center',
+        fontSize: 16,
+        fontWeight: 'bold'
     },
     textContain: {
         flex: 1,

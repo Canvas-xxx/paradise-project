@@ -9,6 +9,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/react-redux": "^6.0.4",
+    "@types/redux-logger": "^3.0.6",
     "react": "^16.3.0",
     "react-native": "0.54.3",
     "react-native-elements": "^0.19.1",

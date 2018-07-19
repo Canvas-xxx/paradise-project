@@ -4,49 +4,24 @@ import { Avatar } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
 export interface Props {
-    image: any,
-    id: string,
-    name: string
+    id: string
 }
 
 interface State {
-    image: any
-    name: string
-    title: string
+    
 }
 
 class ItemCardComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-
-        this.state = {
-            image: props.image,
-            name: props.name,
-            title: ''
-        }
-    }
-
-    componentDidMount() {
-        const name = this.state.name
-        switch (name.split(' ').length) {
-            case 2:
-                this.setState({
-                    title: name.split(' ')[0].slice(0, 1).toLocaleUpperCase() + name.split(' ')[1].slice(0, 1).toLocaleUpperCase()
-                })
-                break
-            default:
-                this.setState({
-                    title: name.slice(0, 2).toLocaleUpperCase()
-                })
-        }
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({id: this.props.id})}}>
-                    {renderAvartar(this.state.image, this.state.title)}
-                    <Text style={styles.cardText}>{this.state.name}</Text>
+                    {renderAvartar(null, 'NM')}
+                    <Text style={styles.cardText}>STUDENT NAME</Text>
                 </TouchableOpacity>
             </View>
         )

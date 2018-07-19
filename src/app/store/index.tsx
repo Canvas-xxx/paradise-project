@@ -7,9 +7,6 @@ import RootReducer from '../reducer/RootReducer'
 
 const epicMiddleware = createEpicMiddleware()
 
-const store = createStore({
-    RootReducer,
-    applyMiddleware(thunk, logger, epicMiddleware)
-})
+const store = createStore(RootReducer, applyMiddleware(thunk, logger, epicMiddleware))
 
 export default store

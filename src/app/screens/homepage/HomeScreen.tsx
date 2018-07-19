@@ -12,12 +12,12 @@ interface State {
 }
 
 const mockData: any[] = [
-    { id: 'index1', image: null, name: 'John Lennon' },
-    { id: 'index2', image: 'https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/128.jpg', name: 'John Henry' },
-    { id: 'index3', image: null, name: 'John Mayor' },
-    { id: 'index4', image: null, name: 'John Colson' },
-    { id: 'index5', image: null, name: 'John Park' },
-    { id: 'index6', image: null, name: 'John Henderson' }
+    { id: 'index1' },
+    { id: 'index2' },
+    { id: 'index3' },
+    { id: 'index4' },
+    { id: 'index5' },
+    { id: 'index6' }
 ]
 
 class HomeScreen extends React.Component<Props, State> {
@@ -28,8 +28,7 @@ class HomeScreen extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <ProfileComponent image='https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg' 
-                    name='Worachote Suwanyothin' details={['10 Sep 1994', 'Developer']} />
+                <ProfileComponent />
                 <View style={{flex: 2}}>
                     <ScrollView> 
                         <View style={styles.listContainer}>
@@ -46,7 +45,7 @@ const renderItems = (items: any[]) => {
     return (
         items.map( (item, index) => {
             return (
-                <ItemCardComponent key={index} image={item.image} name={item.name} id={item.id} />
+                <ItemCardComponent key={index} id={item.id} />
             )
         } )
     )

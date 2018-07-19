@@ -7,6 +7,8 @@ import React from 'react'
 import { Component } from 'react';
 import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
+import { Provider } from 'react-redux'
+import store from './src/app/store'
 
 export default class App extends Component {
   componentWillMount() {
@@ -40,10 +42,9 @@ export default class App extends Component {
 
   render() {
     return (
-      // <View>
-      //   <LoginScreen selectedPage={true} />
-      // </Viewz>
-      <RouterComponent />
+      <Provider store={store}>
+        <RouterComponent />
+      </Provider>
     );
   }
 }

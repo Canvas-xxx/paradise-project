@@ -11,11 +11,8 @@ interface State {
 }
 
 const mockList = [
-    { id: 1 },
-    { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 }
+    { id: 'index1' },
+    { id: 'index2' }
 ]
 
 class TrackingDetailScreen extends React.Component<Props, State> {
