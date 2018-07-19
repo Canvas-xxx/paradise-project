@@ -1,7 +1,12 @@
-export const studentListReducer = (state: any = {id: '', name: ''}, action: any) => {
+export const studentListReducer = (state: any = [], action: any) => {
     switch(action.type) {
-        case 'GET_NEW_STUDENT_LIST':
-            return state = action.payload
+        case 'SET_NEW_STUDENT_LIST':
+            return state = [action.payload]
+        case 'ADD_STUDENT_LIST':
+            return [
+                ...state,
+                action.payload
+            ]
         default:
             return state
     }

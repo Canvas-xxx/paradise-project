@@ -2,27 +2,61 @@ import React from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
 import ProfileComponent from '../../components/home/ProfileComponent'
 import ItemCardComponent from '../../components/home/ItemCardComponent'
+import store from '../../store'
+import { setParent, setStudentList, addStudentList } from '../../actions'
 
 export interface Props {
 
 }
 
 interface State {
-
+    studentList: any
 }
 
-const mockData: any[] = [
-    { id: 'index1' },
-    { id: 'index2' },
-    { id: 'index3' },
-    { id: 'index4' },
-    { id: 'index5' },
-    { id: 'index6' }
-]
+function getParentDetail() {
+    return fetch('http://203.121.143.61:8099/parentDetail', 
+    { 
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json', id: '2' } 
+    })
+        .then((response) => response.json())
+        .catch((error) => { console.log(error) })
+}
 
 class HomeScreen extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
+
+        this.state = {
+            studentList: []
+        }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState()) })
+        getParentDetail().then( (response) => {
+            const obj: Object = {
+                id: response['PAR_SEQ_ID'],
+                name: response['PAR_NAME']
+            }
+            store.dispatch(setParent(obj))
+            response['studentList'].forEach( (student: any, index: number) => {
+                const std: Object = {
+                    id: student['STU_SEQ_ID'],
+                    name: student['STU_NAME_TH']
+                }
+                switch(index) {
+                    case 1:
+                        store.dispatch(setStudentList(std))
+                        break
+                    default:
+                        store.dispatch(addStudentList(std))
+                }
+            })
+            console.log(this.state)
+        }, (error) => {
+            console.log(error)
+        })
     }
 
     render() {
@@ -32,7 +66,7 @@ class HomeScreen extends React.Component<Props, State> {
                 <View style={{flex: 2}}>
                     <ScrollView> 
                         <View style={styles.listContainer}>
-                            {renderItems(mockData)}
+                            {renderItems(this.state.studentList)}
                         </View>
                     </ScrollView>
                 </View>
@@ -45,7 +79,7 @@ const renderItems = (items: any[]) => {
     return (
         items.map( (item, index) => {
             return (
-                <ItemCardComponent key={index} id={item.id} />
+                <ItemCardComponent key={index} student={item} />
             )
         } )
     )

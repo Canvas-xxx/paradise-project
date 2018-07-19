@@ -1,7 +1,12 @@
-export const stateListReducer = (state: any = {  }, action: any) => {
+export const stateListReducer = (state: any = [], action: any) => {
     switch (action.type) {
-        case 'GET_NEW_STATE_LIST':
-            return state = action.payload
+        case 'SET_NEW_STATE_LIST':
+            return state = [action.payload]
+        case 'ADD_STATE_LIST':
+            return [
+                ...state,
+                action.payload
+            ]
         default:
             return state
     }

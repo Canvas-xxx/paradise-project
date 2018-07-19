@@ -4,24 +4,28 @@ import { Avatar } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 
 export interface Props {
-    id: string
+    student: any
 }
 
 interface State {
-    
+    student: any
 }
 
 class ItemCardComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
+
+        this.state = {
+            student: props.student
+        }
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({id: this.props.id})}}>
-                    {renderAvartar(null, 'NM')}
-                    <Text style={styles.cardText}>STUDENT NAME</Text>
+                <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({ id: this.props.student.id })}}>
+                    {renderAvartar(null, this.state.student.name)}
+                    <Text style={styles.cardText}>{this.state.student.name}</Text>
                 </TouchableOpacity>
             </View>
         )

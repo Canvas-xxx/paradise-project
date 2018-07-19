@@ -4,6 +4,8 @@ import { Actions } from 'react-native-router-flux'
 import CardBox from '../../components/login/CardBox'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
+import store from '../../store'
+import { setUsername, setPassword } from '../../actions'
 
 export interface Props {
     selectedPage: boolean
@@ -13,14 +15,40 @@ interface State {
     selectedPage: boolean
 }
 
+function authentication() {
+    // return fetch('http://203.121.143.61:8099/authenticationLogin', 
+    // { 
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({
+    //         username: 'test1',
+    //         password: 'cGFzc3dvcmQNCg=='
+    //     })
+    // })
+    //     .then((response) => response.json())
+    //     .catch((error) => { console.log(error) })
+    Actions.main()
+}
+
+function setUser(text: any) {
+    // store.dispatch(setUsername(text))
+}
+
+function setPass(text: any) {
+    // store.dispatch(setPassword(text))
+}
+
 class LoginScreen extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
         this.state = {
-            // selectedPage: props.selectedPage
             selectedPage: true
         }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState()) })
     }
 
     render() {
@@ -63,9 +91,9 @@ const LoginPage = (state: boolean) => {
     if (state) {
         return (
             <CardBox key='login'>
-                <InputComponent placeholder='Username' icon='email' secure={false} />
-                <InputComponent placeholder='Password' icon='lock' secure={true} />
-                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {Actions.main()}} />
+                <InputComponent placeholder='Username' icon='email' secure={false} handle={(text: any) => {setUser(text)}} />
+                <InputComponent placeholder='Password' icon='lock' secure={true} handle={(text: any) => {setPass(text)}} />
+                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {authentication()}} />
                 <TouchableOpacity style={{marginTop: 15}} onPress={() => {Actions.forgot()}}>
                     <Text style={{fontSize: 12, color: '#33502e'}}>Forgot your password?</Text>
                 </TouchableOpacity>
@@ -74,10 +102,10 @@ const LoginPage = (state: boolean) => {
     } else {
         return (
             <CardBox key='register'>
-                <InputComponent placeholder='Name' icon='person' secure={false} />
-                <InputComponent placeholder='Username' icon='email' secure={false} />
-                <InputComponent placeholder='Password' icon='lock' secure={true} />
-                <InputComponent placeholder='Confirm Password' icon='lock' secure={true} />
+                <InputComponent placeholder='Name' icon='person' secure={false} handle={() => ({})} />
+                <InputComponent placeholder='Username' icon='email' secure={false} handle={() => ({})} />
+                <InputComponent placeholder='Password' icon='lock' secure={true} handle={() => ({})} />
+                <InputComponent placeholder='Confirm Password' icon='lock' secure={true} handle={() => ({})} />
                 <ButtonComponent name='SIGN UP' color='#aacf68' function={() => {}} />
             </CardBox>
         )

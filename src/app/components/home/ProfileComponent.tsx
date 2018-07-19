@@ -1,26 +1,37 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { Avatar } from 'react-native-elements'
+import store from '../../store'
 
 export interface Props {
-
+    
 }
 
 interface State {
-
+    id: string
+    name: string
 }
 
 class ProfileComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
+
+        this.state = {
+            id: '',
+            name: ''
+        }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState().parent) })
     }
 
     render() {
         return (
             <View style={styles.container}>
-                {renderAvartar(null, 'NM')}
+                <Avatar large rounded title={this.state.name} />
                 <View style={styles.detailContainer}>
-                    <Text style={styles.nameText}>PARENT NAME</Text>
+                    <Text style={styles.nameText}>{this.state.name}</Text>
                 </View>
             </View>
         )

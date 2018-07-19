@@ -21,10 +21,10 @@ class CardListItemComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={() => {Actions.trackingDetail()}} >
+            <TouchableOpacity style={styles.container} onPress={() => {Actions.trackingDetail({ id: this.state.details.id })}} >
                 <View style={styles.bodyContain}>
-                    <Text style={styles.titleText}>LAST STATE</Text>
-                    <Text style={styles.detailText}>TIME</Text>
+                    <Text style={styles.titleText}>{this.state.details.status}</Text>
+                    <Text style={styles.detailText}>{this.state.details.time}</Text>
                 </View>
             </TouchableOpacity>
         )

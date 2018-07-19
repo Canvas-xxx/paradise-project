@@ -5,13 +5,15 @@ import { Icon } from 'react-native-elements'
 export interface Props {
     icon: string
     placeholder: string
-    secure: boolean
+    secure: boolean,
+    handle: any
 }
 
 interface State {
     icon: string
     placeholder: string,
-    secure: boolean
+    secure: boolean,
+    handle: any
 }
 
 export default class InputComponent extends React.Component<Props, State> {
@@ -21,7 +23,8 @@ export default class InputComponent extends React.Component<Props, State> {
         this.state = {
             icon: props.icon,
             placeholder: props.placeholder,
-            secure: props.secure
+            secure: props.secure,
+            handle: props.handle
         }
     }
 
@@ -33,7 +36,8 @@ export default class InputComponent extends React.Component<Props, State> {
                     style={styles.inputStyle} 
                     placeholder={this.state.placeholder}
                     secureTextEntry={this.state.secure}
-                    autoCapitalize='none' />
+                    autoCapitalize='none'
+                    onChangeText={this.state.handle} />
             </View>
         )
     }

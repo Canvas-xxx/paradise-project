@@ -1,37 +1,62 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import store from '../../store'
 
 export interface Props {
-    details: Object
+
 }
 
 interface State {
-    details: Object
+    id: string,
+    school: string,
+    teacher: string,
+    teacherPhone: string,
+    driver: string,
+    driverPhone: string,
+    bus: string,
+    time: string,
+    status: string
 }
 
 class DetailBoxComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
+
+        this.state = {
+            id: '',
+            school: '',
+            teacher: '',
+            teacherPhone: '',
+            driver: '',
+            driverPhone: '',
+            bus: '',
+            time: '',
+            status: ''
+        }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState().state) })
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textTitle}>SCHOOL NAME</Text>
+                    <Text style={styles.textTitle}>{this.state.school}</Text>
                 </View>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>TEACHER NAME</Text>
-                    <Text style={styles.textContain}>TEACHER PHONE</Text>
+                    <Text style={styles.textContain}>{this.state.teacher}</Text>
+                    <Text style={styles.textContain}>{this.state.teacherPhone}</Text>
                 </View>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>DRIVER NAME</Text>
-                    <Text style={styles.textContain}>DRIVER PHONE</Text>
+                    <Text style={styles.textContain}>{this.state.driver}</Text>
+                    <Text style={styles.textContain}>{this.state.driverPhone}</Text>
                 </View>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>BUS NUMBER</Text>
-                    <Text style={styles.textContain}>TIME</Text>
-                    <Text style={styles.textContain}>STATUS</Text>
+                    <Text style={styles.textContain}>{this.state.bus}</Text>
+                    <Text style={styles.textContain}>{this.state.status}</Text>
+                    <Text style={styles.textContain}>{this.state.time}</Text>
                 </View>
             </View>
         )
@@ -47,7 +72,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         shadowColor: 'black',
         shadowOffset: { width: 1, height: 5 },
-        shadowOpacity: 1,
+        shadowOpacity: .3,
         shadowRadius: 15,
         marginBottom: 15,
         paddingTop: 10,
