@@ -14,7 +14,7 @@ const RouterComponent = () => {
         return (
             <Router>
                 <Stack key='root'>
-                    <Scene key='auth' hideNavBar={true}>
+                    <Scene key='auth' hideNavBar={true} initial>
                         <Scene key='login' component={LoginScreen} hideNavBar={true} />
                         <Scene key='forgot' component={ForgotScreen} hideNavBar={true} />
                     </Scene>
@@ -67,11 +67,11 @@ const RouterComponent = () => {
         return (
             <Router>
                 <Stack key='root'>
-                    <Scene key='auth' hideNavBar={true}>
+                    <Scene key='auth' hideNavBar={true} initial>
                         <Scene key='login' component={LoginScreen} hideNavBar={true} />
                         <Scene key='forgot' component={ForgotScreen} hideNavBar={true} />
                     </Scene>
-                    <Scene key='main' tabs={true} tabBarPosition='bottom' showLabel={false} tabBarStyle={{ backgroundColor: '#f5f5f5', borderTopWidth: 1, borderTopColor: '#33502e' }}  hideNavBar={true} initial>
+                    <Scene key='main' tabs={true} tabBarPosition='bottom' showLabel={false} tabBarStyle={{ backgroundColor: '#f5f5f5', borderTopWidth: 1, borderTopColor: '#33502e' }}  hideNavBar={true}>
                         <Scene key='home'
                             icon={({focused}) => (
                                 <Icon name='home'

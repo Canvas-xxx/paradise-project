@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios": "react-native run-ios --simulator='iPhone 6'",
     "android": "react-native run-android",
+    "build:android": "react-native run-android --variant=release",
     "test": "jest"
   },
   "dependencies": {

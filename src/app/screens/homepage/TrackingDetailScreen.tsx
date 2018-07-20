@@ -37,13 +37,14 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         getStateDetail(this.state.id).then( (response) => {
             const stateObj: Object = {
                 id: response['SBT_SEQ_ID'],
-                school: '',
+                school: response['SCH_NAME_TH'],
                 teacher: response['TECH_NAME'],
                 teacherPhone: response['TECH_PHONE'],
                 driver: response['DRV_NAME'],
                 driverPhone: response['DRV_PHONE'],
                 bus: response['BUS_LICENSE_PLATE'],
-                time: response['SBT_DATE_START'],
+                start: response['SBT_DATE_START'],
+                end: response['SBT_DATE_END'],
                 status: response['SBT_STATUS']
             }
             store.dispatch(setStateDetail(stateObj))

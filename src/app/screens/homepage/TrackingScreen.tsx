@@ -40,7 +40,7 @@ class TrackingScreen extends React.Component<Props, State> {
         getStudentDetail(this.state.id).then( (response) => {
             const stdObj: Object = {
                 id: response['STU_SEQ_ID'],
-                school: '',
+                school: response['SCH_NAME_TH'],
                 name: response['STU_NAME_TH'],
                 class: response['STU_CLASS']
             }

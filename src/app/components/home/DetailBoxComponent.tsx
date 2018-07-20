@@ -14,7 +14,8 @@ interface State {
     driver: string,
     driverPhone: string,
     bus: string,
-    time: string,
+    start: string,
+    end: string,
     status: string
 }
 
@@ -30,7 +31,8 @@ class DetailBoxComponent extends React.Component<Props, State> {
             driver: '',
             driverPhone: '',
             bus: '',
-            time: '',
+            start: '',
+            end: '',
             status: ''
         }
     }
@@ -46,17 +48,26 @@ class DetailBoxComponent extends React.Component<Props, State> {
                     <Text style={styles.textTitle}>{this.state.school}</Text>
                 </View>
                 <View style={styles.bodyContain}>
+                    <Text style={styles.textContain}>Teacher: </Text>
                     <Text style={styles.textContain}>{this.state.teacher}</Text>
                     <Text style={styles.textContain}>{this.state.teacherPhone}</Text>
                 </View>
                 <View style={styles.bodyContain}>
+                    <Text style={styles.textContain}>Driver: </Text>
                     <Text style={styles.textContain}>{this.state.driver}</Text>
                     <Text style={styles.textContain}>{this.state.driverPhone}</Text>
                 </View>
                 <View style={styles.bodyContain}>
+                    <Text style={styles.textContain}>License plate: </Text>
                     <Text style={styles.textContain}>{this.state.bus}</Text>
+                </View>
+                <View style={styles.bodyContain}>
+                    <Text style={styles.textContain}>{this.state.start}</Text>
+                    <Text style={styles.textContain}>{this.state.end}</Text>
+                </View>
+                <View style={styles.bodyContain}>
+                    <Text style={styles.textContain}>Status: </Text>
                     <Text style={styles.textContain}>{this.state.status}</Text>
-                    <Text style={styles.textContain}>{this.state.time}</Text>
                 </View>
             </View>
         )
