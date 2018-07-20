@@ -3,11 +3,6 @@ export const setUsername = (payload: any) => ({
     payload
 })
 
-export const setPassword = (payload: any) => ({
-    type: 'SET_PASS',
-    payload
-})
-
 export const setSender = (payload: any) => ({
     type: 'SET_SENDER',
     payload

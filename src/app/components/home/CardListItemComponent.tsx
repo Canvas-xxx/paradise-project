@@ -14,6 +14,8 @@ class CardListItemComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
+        console.log(props.details)
+
         this.state = {
             details: props.details
         }

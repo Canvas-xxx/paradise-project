@@ -11,7 +11,7 @@ export interface Props {
 
 interface State {
     id: string,
-    studen: any,
+    student: any,
     stateList: any
 }
 
@@ -31,15 +31,13 @@ class TrackingScreen extends React.Component<Props, State> {
 
         this.state = {
             id: props.id,
-            studen: {},
+            student: [],
             stateList: []
         }
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState()) })
         getStudentDetail(this.state.id).then( (response) => {
-            console.log(response)
             const stdObj: Object = {
                 id: response['STU_SEQ_ID'],
                 school: '',
@@ -62,9 +60,10 @@ class TrackingScreen extends React.Component<Props, State> {
                 }
             })
             this.setState({
-                studen: store.getState().student,
+                student: store.getState().student,
                 stateList: store.getState().stateList
             })
+            console.log(this.state)
         }, (error) => {
             console.log(error)
         })
@@ -74,7 +73,7 @@ class TrackingScreen extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <View style={styles.cardContain}>
-                    <TrackingCardComponent details={this.state.stateList} />
+                    {renderStudent([this.state.student])}
                 </View>
                 <View style={{flex: 1}}>
                     <ScrollView style={{flex: 1}}>
@@ -86,6 +85,16 @@ class TrackingScreen extends React.Component<Props, State> {
             </View>
         )
     }
+}
+
+const renderStudent = (item: any[]) => {
+    return (
+        item.map( (i, index) => {
+            return (
+                <TrackingCardComponent key={index} />
+            )
+        })
+    )
 }
 
 const renderList = (items: any[]) => {

@@ -1,13 +1,17 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { Avatar } from 'react-native-elements'
+import store from '../../store'
 
 export interface Props {
-    details: any
+    
 }
 
 interface State {
-    details: any
+    school: string,
+    id: string,
+    name: string,
+    class: string
 }
 
 class TrackingCardComponent extends React.Component<Props, State> {
@@ -15,8 +19,15 @@ class TrackingCardComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            details: props.details
+            school: '',
+            id: '',
+            name: '',
+            class: ''
         }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState().student) })
     }
 
     render() {
@@ -32,19 +43,19 @@ class TrackingCardComponent extends React.Component<Props, State> {
                     <View style={styles.rightSide}>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>School Name: </Text>
-                            <Text style={styles.rightDetail}>SCHOOL NAME</Text>
+                            <Text style={styles.rightDetail}>{this.state.school}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student ID: </Text>
-                            <Text style={styles.rightDetail}>STUDENT ID</Text>
+                            <Text style={styles.rightDetail}>{this.state.id}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student Name: </Text>
-                            <Text style={styles.rightDetail}>STUDENT NAME</Text>
+                            <Text style={styles.rightDetail}>{this.state.name}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Class: </Text>
-                            <Text style={styles.rightDetail}>CLASS</Text>
+                            <Text style={styles.rightDetail}>{this.state.class}</Text>
                         </View>
                     </View>
                 </View>

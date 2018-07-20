@@ -23,6 +23,20 @@ function getParentDetail() {
         .catch((error) => { console.log(error) })
 }
 
+function updateSender(username: string, senderId: string) {
+    return fetch('http://203.121.143.61:8099/updateSenderID', 
+    { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: '',
+            senderId: ''
+        }) 
+    })
+        .then((response) => response.json())
+        .catch((error) => { console.log(error) })
+}
+
 class HomeScreen extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
@@ -34,6 +48,11 @@ class HomeScreen extends React.Component<Props, State> {
 
     componentDidMount() {
         store.subscribe(() => { return this.setState(store.getState()) })
+        updateSender(store.getState().user.username, store.getState().user.sender).then( (response) => {
+            console.log(response)
+        }, (error) => {
+            console.log(error)
+        })
         getParentDetail().then( (response) => {
             const obj: Object = {
                 id: response['PAR_SEQ_ID'],

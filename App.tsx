@@ -9,6 +9,7 @@ import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
 import store from './src/app/store'
+import { setSender } from './src/app/actions'
 
 export default class App extends Component {
   componentWillMount() {
@@ -38,6 +39,7 @@ export default class App extends Component {
 
   onIds(device: any) {
     console.log('Device info: ', device)
+    store.dispatch(setSender(device))
   }
 
   render() {

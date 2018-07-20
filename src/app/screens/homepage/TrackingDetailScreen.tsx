@@ -34,9 +34,7 @@ class TrackingDetailScreen extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState()) })
         getStateDetail(this.state.id).then( (response) => {
-            console.log(response)
             const stateObj: Object = {
                 id: response['SBT_SEQ_ID'],
                 school: '',
@@ -52,7 +50,6 @@ class TrackingDetailScreen extends React.Component<Props, State> {
             this.setState({
                 state: store.getState().state
             })
-            console.log(this.state.state)
         }, (error) => {
             console.log(error)
         })
@@ -75,7 +72,7 @@ const detailBox = (items: any[]) => {
     return (
         items.map( (item, index) => {
             return (
-                <DetailBoxComponent key={index} details={item} />
+                <DetailBoxComponent key={index} />
             )
         })
     )
