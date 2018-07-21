@@ -6,41 +6,47 @@
 import React from 'react'
 import { Component } from 'react';
 import RouterComponent from './src/app/router'
-// import OneSignal from 'react-native-onesignal'
+import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
 import store from './src/app/store'
-import { setSender } from './src/app/actions'
+// import { setSender } from './src/app/actions'
 
 export default class App extends Component {
-  // componentWillMount() {
-  //   OneSignal.init('f4f4bcc5-b7bb-4472-ab09-985584d5f098')
 
-  //   OneSignal.addEventListener('received', this.onReceived)
-  //   OneSignal.addEventListener('opened', this.onOpened)
-  //   OneSignal.addEventListener('ids', this.onIds)
-  // }
+  componentWillMount() {
+    OneSignal.setLogLevel(7, 0)
+    OneSignal.init("f4f4bcc5-b7bb-4472-ab09-985584d5f098")
+    OneSignal.inFocusDisplaying(2)
+  }
 
-  // componentWillUnmount() {
-  //   OneSignal.removeEventListener('received', this.onReceived)
-  //   OneSignal.removeEventListener('opened', this.onOpened)
-  //   OneSignal.removeEventListener('ids', this.onIds)
-  // }
+  componentDidMount() {
+    this.onReceived = this.onReceived.bind(this);
+    this.onOpened = this.onOpened.bind(this);
+    this.onIds = this.onIds.bind(this);
 
-  // onReceived(notification: any) {
-  //   console.log("Notification received: ", notification)
-  // }
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
 
-  // onOpened(openResult: any) {
-  //   console.log('Message: ', openResult.notification.payload.body)
-  //   console.log('Data: ', openResult.notification.payload.additionalData)
-  //   console.log('isActive: ', openResult.notification.isAppInFocus)
-  //   console.log('openResult: ', openResult)
-  // }
+  onReceived(notification: any) {
+    console.log("Notification received: ", notification);
 
-  // onIds(device: any) {
-  //   console.log('Device info: ', device)
-  //   store.dispatch(setSender(device))
-  // }
+    this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
+  }
+
+  onOpened(openResult: any) {
+    console.log('Message: ', openResult.notification.payload.body);
+    console.log('Data: ', openResult.notification.payload.additionalData);
+    console.log('isActive: ', openResult.notification.isAppInFocus);
+    console.log('openResult: ', openResult);
+
+    // this.setState({jsonDebugText : "OPENED: \n" + JSON.stringify(openResult.notification, null, 2)})
+  }
+
+  onIds(device: any) {
+    console.log('Device info: ', device);
+  }
 
   render() {
     return (
@@ -49,4 +55,5 @@ export default class App extends Component {
       </Provider>
     );
   }
+
 }
