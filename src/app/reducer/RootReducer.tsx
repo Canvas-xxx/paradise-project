@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { userReducer } from './parent/UserReducer'
+import { userReducer, userRejectedReducer } from './parent/UserReducer'
 import { parentReducer } from './parent/ParentReducer'
 import { studentReducer } from './student/StudentReducer'
 import { studentListReducer } from './student/StudentListReducer'
@@ -8,6 +8,7 @@ import { stateListReducer } from './process/StateListReducer'
 
 export default combineReducers({
     user: userReducer,
+    userReject: userRejectedReducer,
     parent: parentReducer,
     student: studentReducer,
     studentList: studentListReducer,

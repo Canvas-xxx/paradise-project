@@ -1,11 +1,29 @@
-export const userReducer = (state: any = { username: '', password: '', sender: '' }, action: any) => {
+export const userReducer = (state: any = {}, action: any) => {
     switch(action.type) {
-        case 'SET_USERNAME':
-            const obj1: Object = { username: action.payload.username, password: action.payload.password, sender: state.sender }
-            return state = obj1
-        case 'SET_SENDER':
-            const obj2: Object = { username: state.username, password: state.password, sender: action.payload }
-            return state = obj2
+        case 'FETCH_USER':
+            return state = {}
+        case 'FETCH_USER_FULFILLED':
+            return state = action.payload
+        default:
+            return state
+    }
+}
+
+export const senderReducer = (state: any = {}, action: any) => {
+    switch(action.type) {
+        case 'FETCH_SENDER':
+            return state = {}
+        case 'FETCH_SENDER_FULFILLED':
+            return state = action.payload
+        default:
+            return state
+    }
+}
+
+export const userRejectedReducer = (state: any = {}, action: any) => {
+    switch(action.type) {
+        case 'FETCH_USER_REJECTED':
+            return state = action.payload
         default:
             return state
     }

@@ -23,9 +23,9 @@ class ItemCardComponent extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({ id: this.props.student.id })}}>
-                    {renderAvartar(null, this.state.student.name)}
-                    <Text style={styles.cardText}>{this.state.student.name}</Text>
+                <TouchableOpacity style={styles.cardBox} activeOpacity={.8} onPress={() => {Actions.tracking({ id: this.props.student.STU_SEQ_ID })}}>
+                    {renderAvartar(null, this.state.student.STU_NAME_TH.split(' ')[0][0] + this.state.student.STU_NAME_TH.split(' ')[1][0])}
+                    <Text style={styles.cardText}>{this.state.student.STU_NAME_TH}</Text>
                 </TouchableOpacity>
             </View>
         )

@@ -9,18 +9,7 @@ export interface Props {
 }
 
 interface State {
-    id: string,
-    state: any
-}
-
-function getStateDetail(id: string) {
-    return fetch('http://203.121.143.61:8099/stateDetail', 
-    { 
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', id: id } 
-    })
-        .then((response) => response.json())
-        .catch((error) => { console.log(error) })
+    SBT_SEQ_ID: string
 }
 
 class TrackingDetailScreen extends React.Component<Props, State> {
@@ -28,32 +17,13 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            id: props.id,
-            state: {}
+            SBT_SEQ_ID: props.id
         }
     }
 
     componentDidMount() {
-        getStateDetail(this.state.id).then( (response) => {
-            const stateObj: Object = {
-                id: response['SBT_SEQ_ID'],
-                school: response['SCH_NAME_TH'],
-                teacher: response['TECH_NAME'],
-                teacherPhone: response['TECH_PHONE'],
-                driver: response['DRV_NAME'],
-                driverPhone: response['DRV_PHONE'],
-                bus: response['BUS_LICENSE_PLATE'],
-                start: response['SBT_DATE_START'],
-                end: response['SBT_DATE_END'],
-                status: response['SBT_STATUS']
-            }
-            store.dispatch(setStateDetail(stateObj))
-            this.setState({
-                state: store.getState().state
-            })
-        }, (error) => {
-            console.log(error)
-        })
+        store.subscribe(() => { return this.setState(store.getState().state) })
+        store.dispatch({ type: 'FETCH_STATE', payload: { SBT_SEQ_ID: this.state.SBT_SEQ_ID } })
     }
 
     render() {
@@ -67,16 +37,6 @@ class TrackingDetailScreen extends React.Component<Props, State> {
             </View>
         )
     }
-}
-
-const detailBox = (items: any[]) => {
-    return (
-        items.map( (item, index) => {
-            return (
-                <DetailBoxComponent key={index} />
-            )
-        })
-    )
 }
 
 const styles = StyleSheet.create({

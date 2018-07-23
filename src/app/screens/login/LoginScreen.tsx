@@ -5,42 +5,15 @@ import CardBox from '../../components/login/CardBox'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
 import store from '../../store'
-import { setUsername } from '../../actions'
 
 export interface Props {
-    selectedPage: boolean
+    
 }
 
 interface State {
-    selectedPage: boolean
-}
-
-let username: string = ''
-let password: string = ''
-
-function authentication() {
-    return fetch('http://203.121.143.61:8099/authenticationLogin',
-    { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            username: username,
-            password: password
-        })
-    })
-        .then((response) => response.json() )
-        .catch((error) => { console.log(error) })
-}
-
-function setUser() {
-    authentication().then( (response) => {
-        if (response.length > 0) {
-            store.dispatch(setUsername({ username: username, password: password}))
-            Actions.main()
-        }
-    }, (error) => {
-        console.log(error)
-    })
+    username: string,
+    password: string,
+    USER_PAR_SEQ_ID: string
 }
 
 class LoginScreen extends React.Component<Props, State> {
@@ -48,8 +21,30 @@ class LoginScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            selectedPage: true
+            username: '',
+            password: '',
+            USER_PAR_SEQ_ID: ''
         }
+    }
+
+    public setUser() {
+        store.dispatch({ 
+            type: 'FETCH_USER',
+            payload: {
+                username: this.state.username,
+                password: this.state.password 
+            }
+        })
+        const that = this
+        setTimeout( function() {
+            if (store.getState().user['USER_ID']) {
+                Actions.home({ id: that.state.USER_PAR_SEQ_ID })
+            }
+        }, 1000)
+    }
+
+    componentWillMount() {
+        store.subscribe(() => { return this.setState(store.getState().user) })
     }
 
     render() {
@@ -58,57 +53,15 @@ class LoginScreen extends React.Component<Props, State> {
                 <View style={styles.imageContainer}>
                     <Image style={styles.imageStyle} source={require('../../../assets/icon/logo/paradise-logo.png')} />
                 </View>
-                <View style={styles.selectContainer}>
-                    <TouchableOpacity style={styles.tabs} disabled={this.state.selectedPage} onPress={() => {this.setState({selectedPage: true})}}>
-                        {tabs(this.state.selectedPage, 'SIGN IN')}
+                <CardBox key='login'>
+                    <InputComponent placeholder='Username' icon='email' secure={false} handle={(text: any) => {this.setState({ username: text })}} />
+                    <InputComponent placeholder='Password' icon='lock' secure={true} handle={(text: any) => {this.setState({ password: text })}} />
+                    <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {this.setUser()}} />
+                    <TouchableOpacity style={{marginTop: 15}} onPress={() => {Actions.forgot()}}>
+                        <Text style={{fontSize: 12, color: '#33502e'}}>Forgot your password?</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.tabs} disabled={!this.state.selectedPage} onPress={() => {this.setState({selectedPage: false})}}>
-                        {tabs(!this.state.selectedPage, 'SIGN UP')}
-                    </TouchableOpacity>
-                </View>
-                {LoginPage(this.state.selectedPage)}
+                </CardBox>
             </View>
-        )
-    }
-}
-
-const tabs = (state: boolean, title: string) => {
-    if (state) {
-        return (
-            <View style={styles.tabsSelected}>
-                <Text style={styles.selectedTabs}>{title}</Text>
-            </View>
-        )
-    } else {
-        return (
-            <View style={styles.tabsNormal}>
-                <Text style={styles.normalTabs}>{title}</Text>
-            </View>
-        )
-    }
-}
-
-const LoginPage = (state: boolean) => {
-    if (state) {
-        return (
-            <CardBox key='login'>
-                <InputComponent placeholder='Username' icon='email' secure={false} handle={(text: any) => {username = text}} />
-                <InputComponent placeholder='Password' icon='lock' secure={true} handle={(text: any) => {password = text}} />
-                <ButtonComponent name='SIGN IN' color='#aacf68' function={() => {setUser()}} />
-                <TouchableOpacity style={{marginTop: 15}} onPress={() => {Actions.forgot()}}>
-                    <Text style={{fontSize: 12, color: '#33502e'}}>Forgot your password?</Text>
-                </TouchableOpacity>
-            </CardBox>
-        )
-    } else {
-        return (
-            <CardBox key='register'>
-                <InputComponent placeholder='Name' icon='person' secure={false} handle={() => ({})} />
-                <InputComponent placeholder='Username' icon='email' secure={false} handle={() => ({})} />
-                <InputComponent placeholder='Password' icon='lock' secure={true} handle={() => ({})} />
-                <InputComponent placeholder='Confirm Password' icon='lock' secure={true} handle={() => ({})} />
-                <ButtonComponent name='SIGN UP' color='#aacf68' function={() => {}} />
-            </CardBox>
         )
     }
 }
@@ -130,46 +83,6 @@ const styles = StyleSheet.create({
         width: 200,
         height: 80,
         resizeMode: 'contain'
-    },
-    selectContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginLeft: '3%',
-        marginRight: '3%',
-        justifyContent: 'space-between'
-    },
-    tabs: {
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    tabsSelected: {
-        backgroundColor: 'white',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: 50,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-    },
-    tabsNormal: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%',
-        height: 50
-    },
-    selectedTabs: {
-        fontSize: 20,
-        color: '#33502e',
-        opacity: 1
-    },
-    normalTabs: {
-        fontSize: 18,
-        color: '#629e3e',
-        opacity: .8
     }
 })
 

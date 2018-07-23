@@ -9,7 +9,7 @@ import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
 import store from './src/app/store'
-// import { setSender } from './src/app/actions'
+import { setSender } from './src/app/actions'
 
 export default class App extends Component {
 
@@ -40,8 +40,6 @@ export default class App extends Component {
     console.log('Data: ', openResult.notification.payload.additionalData);
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
-
-    // this.setState({jsonDebugText : "OPENED: \n" + JSON.stringify(openResult.notification, null, 2)})
   }
 
   onIds(device: any) {

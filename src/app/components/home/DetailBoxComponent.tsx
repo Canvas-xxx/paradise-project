@@ -7,16 +7,15 @@ export interface Props {
 }
 
 interface State {
-    id: string,
-    school: string,
-    teacher: string,
-    teacherPhone: string,
-    driver: string,
-    driverPhone: string,
-    bus: string,
-    start: string,
-    end: string,
-    status: string
+    SCH_NAME_TH: string,
+    TECH_NAME: string,
+    TECH_PHONE: string,
+    DRV_NAME: string,
+    DRV_PHONE: string,
+    BUS_LICENSE_PLATE: string,
+    SBT_DATE_START: string,
+    SBT_DATE_END: string,
+    SBT_STATUS: string
 }
 
 class DetailBoxComponent extends React.Component<Props, State> {
@@ -24,16 +23,15 @@ class DetailBoxComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            id: '',
-            school: '',
-            teacher: '',
-            teacherPhone: '',
-            driver: '',
-            driverPhone: '',
-            bus: '',
-            start: '',
-            end: '',
-            status: ''
+            SCH_NAME_TH: '',
+            TECH_NAME: '',
+            TECH_PHONE: '',
+            DRV_NAME: '',
+            DRV_PHONE: '',
+            BUS_LICENSE_PLATE: '',
+            SBT_DATE_START: '',
+            SBT_DATE_END: '',
+            SBT_STATUS: ''
         }
     }
 
@@ -45,29 +43,29 @@ class DetailBoxComponent extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textTitle}>{this.state.school}</Text>
+                    <Text style={styles.textTitle}>{this.state.SCH_NAME_TH}</Text>
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>Teacher: </Text>
-                    <Text style={styles.textContain}>{this.state.teacher}</Text>
-                    <Text style={styles.textContain}>{this.state.teacherPhone}</Text>
+                    <Text style={styles.textContain}>{this.state.TECH_NAME}</Text>
+                    <Text style={styles.textContain}>{this.state.TECH_PHONE}</Text>
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>Driver: </Text>
-                    <Text style={styles.textContain}>{this.state.driver}</Text>
-                    <Text style={styles.textContain}>{this.state.driverPhone}</Text>
+                    <Text style={styles.textContain}>{this.state.DRV_NAME}</Text>
+                    <Text style={styles.textContain}>{this.state.DRV_PHONE}</Text>
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>License plate: </Text>
-                    <Text style={styles.textContain}>{this.state.bus}</Text>
+                    <Text style={styles.textContain}>{this.state.BUS_LICENSE_PLATE}</Text>
                 </View>
                 <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>{this.state.start}</Text>
-                    <Text style={styles.textContain}>{this.state.end}</Text>
+                    <Text style={styles.textContain}>{this.state.SBT_DATE_START}</Text>
+                    <Text style={styles.textContain}>{this.state.SBT_DATE_END}</Text>
                 </View>
                 <View style={styles.bodyContain}>
                     <Text style={styles.textContain}>Status: </Text>
-                    <Text style={styles.textContain}>{this.state.status}</Text>
+                    <Text style={styles.textContain}>{this.state.SBT_STATUS}</Text>
                 </View>
             </View>
         )

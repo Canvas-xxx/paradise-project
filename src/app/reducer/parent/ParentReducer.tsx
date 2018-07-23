@@ -1,6 +1,8 @@
-export const parentReducer = (state: any = { id: '', name: '' }, action: any) => {
+export const parentReducer = (state: any = {}, action: any) => {
     switch(action.type) {
-        case 'GET_NEW_PARENT':
+        case 'FETCH_PARENT':
+            return state = {}
+        case 'FETCH_PARENT_FULFILLED':
             return state = action.payload
         default:
             return state

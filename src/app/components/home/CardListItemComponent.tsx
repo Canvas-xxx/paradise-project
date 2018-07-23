@@ -1,39 +1,67 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import store from '../../store'
 
 export interface Props {
-    details: any
+    
 }
 
 interface State {
-    details: any
+    stateList: any
 }
 
 class CardListItemComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
-        console.log(props.details)
-
         this.state = {
-            details: props.details
+            stateList: []
         }
+    }
+
+    componentDidMount() {
+        store.subscribe(() => { return this.setState(store.getState().stateList) })
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            stateList: store.getState().stateList
+        })
+    }
+
+    renderList() {
+        return (
+            this.state.stateList.map( (item: any, index: string) => {
+                return (
+                    <TouchableOpacity key={index} style={styles.container} onPress={() => {Actions.trackingDetail({ id: item.SBT_SEQ_ID })}} >
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>{item.SBT_STATUS}</Text>
+                            <Text style={styles.detailText}>{item.SBT_DATE_START}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )
+            })
+        )
     }
 
     render() {
         return (
-            <TouchableOpacity style={styles.container} onPress={() => {Actions.trackingDetail({ id: this.state.details.id })}} >
-                <View style={styles.bodyContain}>
-                    <Text style={styles.titleText}>{this.state.details.status}</Text>
-                    <Text style={styles.detailText}>{this.state.details.time}</Text>
-                </View>
-            </TouchableOpacity>
+            <View style={styles.listContain}>
+                {this.renderList()}
+            </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
+    listContain: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     container: {
         flexBasis: '90%',
         backgroundColor: 'white',

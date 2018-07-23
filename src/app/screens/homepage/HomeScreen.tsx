@@ -1,40 +1,15 @@
 import React from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import ProfileComponent from '../../components/home/ProfileComponent'
-import ItemCardComponent from '../../components/home/ItemCardComponent'
+import StudentListComponent from '../../components/home/StudentListComponent'
 import store from '../../store'
-import { setParent, setStudentList, addStudentList } from '../../actions'
 
 export interface Props {
-
+    id: string
 }
 
 interface State {
-    studentList: any
-}
-
-function getParentDetail() {
-    return fetch('http://203.121.143.61:8099/parentDetail', 
-    { 
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', id: '2' } 
-    })
-        .then((response) => response.json())
-        .catch((error) => { console.log(error) })
-}
-
-function updateSender(username: string, senderId: string) {
-    return fetch('http://203.121.143.61:8099/updateSenderID', 
-    { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            username: '',
-            senderId: ''
-        }) 
-    })
-        .then((response) => response.json())
-        .catch((error) => { console.log(error) })
+    USER_PAR_SEQ_ID: string
 }
 
 class HomeScreen extends React.Component<Props, State> {
@@ -42,40 +17,15 @@ class HomeScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            studentList: []
+            USER_PAR_SEQ_ID: props.id
         }
     }
 
-    componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState()) })
-        updateSender(store.getState().user.username, store.getState().user.sender).then( (response) => {
-            console.log(response)
-        }, (error) => {
-            console.log(error)
-        })
-        getParentDetail().then( (response) => {
-            const obj: Object = {
-                id: response['PAR_SEQ_ID'],
-                name: response['PAR_NAME']
-            }
-            store.dispatch(setParent(obj))
-            response['studentList'].forEach( (student: any, index: number) => {
-                const std: Object = {
-                    id: student['STU_SEQ_ID'],
-                    name: student['STU_NAME_TH']
-                }
-                switch(index) {
-                    case 1:
-                        store.dispatch(setStudentList(std))
-                        break
-                    default:
-                        store.dispatch(addStudentList(std))
-                }
-            })
-            console.log(this.state)
-        }, (error) => {
-            console.log(error)
-        })
+    componentWillMount() {
+        store.subscribe(() => { return this.setState(store.getState().user) })
+        store.dispatch({ type: 'FETCH_PARENT', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
+        store.dispatch({ type: 'FETCH_STUDENT_LIST', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
+        // store.dispatch({ type: 'FETCH_SENDER', payload: { username: store.getState().user.USER_ID, senderId: 'd11c2012-9e84-4d92-b43f-ccadbaba7566' } })
     }
 
     render() {
@@ -83,25 +33,11 @@ class HomeScreen extends React.Component<Props, State> {
             <View style={styles.container}>
                 <ProfileComponent />
                 <View style={{flex: 2}}>
-                    <ScrollView> 
-                        <View style={styles.listContainer}>
-                            {renderItems(this.state.studentList)}
-                        </View>
-                    </ScrollView>
+                    <StudentListComponent />
                 </View>
             </View>
         )
     }
-}
-
-const renderItems = (items: any[]) => {
-    return (
-        items.map( (item, index) => {
-            return (
-                <ItemCardComponent key={index} student={item} />
-            )
-        } )
-    )
 }
 
 const styles = StyleSheet.create({
@@ -110,15 +46,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start'
-    },
-    listContainer: {
-        flex: 1,
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-        width: '100%',
-        paddingTop: 30,
-        paddingBottom: 30
     }
 })
 

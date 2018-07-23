@@ -8,8 +8,9 @@ export interface Props {
 }
 
 interface State {
-    id: string
-    name: string
+    PAR_NAME: string,
+    PAR_PHONE: string,
+    Avatar: string
 }
 
 class ProfileComponent extends React.Component<Props, State> {
@@ -17,21 +18,31 @@ class ProfileComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            id: '',
-            name: ''
+            PAR_NAME: '',
+            PAR_PHONE: '',
+            Avatar: ''
         }
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().parent) })
+        store.subscribe(() => { 
+            return this.setState(store.getState().parent)
+         })
+    }
+
+    componentWillReceiveProps() {
+        this.setState({
+            Avatar: store.getState().parent.PAR_NAME.split(' ')[0][0] + store.getState().parent.PAR_NAME.split(' ')[1][0]
+        })
     }
 
     render() {
         return (
             <View style={styles.container}>
-                <Avatar large rounded title={this.state.name} />
+                <Avatar large rounded title={this.state.Avatar} />
                 <View style={styles.detailContainer}>
-                    <Text style={styles.nameText}>{this.state.name}</Text>
+                    <Text style={styles.nameText}>{this.state.PAR_NAME}</Text>
+                    <Text style={styles.nameText}>{this.state.PAR_PHONE}</Text>
                 </View>
             </View>
         )

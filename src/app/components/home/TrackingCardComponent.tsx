@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
-import { Avatar } from 'react-native-elements'
 import store from '../../store'
 
 export interface Props {
@@ -8,10 +7,10 @@ export interface Props {
 }
 
 interface State {
-    school: string,
-    id: string,
-    name: string,
-    class: string
+    SCH_NAME_TH: string,
+    STU_RFID_SEQ_ID: string,
+    STU_NAME_TH: string,
+    STU_CLASS: string
 }
 
 class TrackingCardComponent extends React.Component<Props, State> {
@@ -19,10 +18,10 @@ class TrackingCardComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            school: '',
-            id: '',
-            name: '',
-            class: ''
+            SCH_NAME_TH: '',
+            STU_RFID_SEQ_ID: '',
+            STU_NAME_TH: '',
+            STU_CLASS: ''
         }
     }
 
@@ -43,19 +42,19 @@ class TrackingCardComponent extends React.Component<Props, State> {
                     <View style={styles.rightSide}>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>School Name: </Text>
-                            <Text style={styles.rightDetail}>{this.state.school}</Text>
+                            <Text style={styles.rightDetail}>{this.state.SCH_NAME_TH}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student ID: </Text>
-                            <Text style={styles.rightDetail}>{this.state.id}</Text>
+                            <Text style={styles.rightDetail}>{this.state.STU_RFID_SEQ_ID}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student Name: </Text>
-                            <Text style={styles.rightDetail}>{this.state.name}</Text>
+                            <Text style={styles.rightDetail}>{this.state.STU_NAME_TH}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Class: </Text>
-                            <Text style={styles.rightDetail}>{this.state.class}</Text>
+                            <Text style={styles.rightDetail}>{this.state.STU_CLASS}</Text>
                         </View>
                     </View>
                 </View>
