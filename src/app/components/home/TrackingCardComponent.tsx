@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { Button } from 'react-native-elements'
 import store from '../../store'
 
 export interface Props {
@@ -58,6 +59,14 @@ class TrackingCardComponent extends React.Component<Props, State> {
                         </View>
                     </View>
                 </View>
+                <View style={styles.body}>
+                    <View style={styles.textContain}>
+                        <Button title='ตารางสอบ' onPress={() => {}} />
+                    </View>
+                    <View style={styles.textContain}>
+                        <Button title='ผลการเรียน' onPress={() => {}} />
+                    </View>
+                </View>
             </View>
         )
     }
@@ -66,7 +75,6 @@ class TrackingCardComponent extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height: 200,
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: 'white',
@@ -97,7 +105,8 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 5
     },
     leftSide: {
         flex: 1,

@@ -30,14 +30,14 @@ class TrackingScreen extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.cardContain}>
-                    <TrackingCardComponent />
-                </View>
-                <View style={{flex: 1}}>
-                    <ScrollView style={{flex: 1}}>
+                <ScrollView style={{flex: 1, width: '100%'}}>
+                    <View style={styles.cardContain}>
+                        <TrackingCardComponent />
+                    </View>
+                    <View style={{flex: 1}}>
                         <CardListItemComponent />
-                    </ScrollView>
-                </View>
+                    </View>
+                </ScrollView>
             </View>
         )
     }

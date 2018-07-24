@@ -50,7 +50,8 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
     action$.pipe(
         ofType(FETCH_STATE),
         mergeMap((payload: any) =>
-          ajax.get(`http://localhost:8099/stateDetail`, {
+        //   ajax.get(`http://localhost:8099/stateDetail`, {
+            ajax.get(`http://203.121.143.61:8099/stateDetail`, {
               'Content-Type': 'application/json',
               'id': payload.payload.SBT_SEQ_ID
           })

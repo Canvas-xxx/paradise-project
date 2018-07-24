@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
+import { Button } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 import store from '../../store'
 
@@ -34,12 +35,31 @@ class CardListItemComponent extends React.Component<Props, State> {
         return (
             this.state.stateList.map( (item: any, index: string) => {
                 return (
-                    <TouchableOpacity key={index} style={styles.container} onPress={() => {Actions.trackingDetail({ id: item.SBT_SEQ_ID })}} >
+                    <View key={index} style={styles.container} >
                         <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>{item.SBT_STATUS}</Text>
-                            <Text style={styles.detailText}>{item.SBT_DATE_START}</Text>
+                            <Text style={styles.titleText}>License plate: </Text>
+                            <Text style={styles.detailText}>{item.BUS_LICENSE_PLATE}</Text>
                         </View>
-                    </TouchableOpacity>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Teacher: </Text>
+                            <Text style={styles.detailText}>{item.TECH_NAME}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Teacher Tel: </Text>
+                            <Text style={styles.detailText}>{item.TECH_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Driver: </Text>
+                            <Text style={styles.detailText}>{item.DRV_NAME}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Driver Tel: </Text>
+                            <Text style={styles.detailText}>{item.DRV_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ id: item.SBT_SEQ_ID })}} />
+                        </View>
+                    </View>
                 )
             })
         )
@@ -56,19 +76,18 @@ class CardListItemComponent extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     listContain: {
-        flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center'
     },
     container: {
-        flexBasis: '90%',
+        width: '90%',
         backgroundColor: 'white',
         shadowColor: 'black',
         shadowOpacity: .2,
         shadowOffset: { width: 1, height: 5 },
-        flexDirection: 'row',
+        flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'center',
         alignItems: 'center',
@@ -79,17 +98,23 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     bodyContain: {
-        flexBasis: '100%',
+        flex: 1,
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 5
     },
     titleText: {
+        flex: 1,
+        textAlign: 'left',
         fontSize: 16,
         fontWeight: 'bold'
     },
     detailText: {
+        flex: 1,
+        textAlign: 'left',
         fontSize: 14
     }
 })
