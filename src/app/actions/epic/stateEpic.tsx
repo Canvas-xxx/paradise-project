@@ -22,7 +22,8 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
   action$.pipe(
       ofType(FETCH_STATE_LIST),
       mergeMap((payload: any) =>
-        ajax.get(`http://localhost:8099/stateStudent`, {
+        // ajax.get(`http://localhost:8099/stateStudent`, {
+        ajax.get(`http://203.121.143.61:8099/stateStudent`, {
             'Content-Type': 'application/json',
             'id': payload.payload.STU_SEQ_ID
         })
