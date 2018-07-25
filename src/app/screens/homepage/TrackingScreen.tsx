@@ -24,7 +24,6 @@ class TrackingScreen extends React.Component<Props, State> {
     componentDidMount() {
         store.subscribe(() => { return this.setState(store.getState().student) })
         store.dispatch({ type: 'FETCH_STUDENT', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID } })
-        store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID } })
     }
 
     render() {

@@ -2,14 +2,14 @@ import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import DetailBoxComponent from '../../components/home/DetailBoxComponent'
 import store from '../../store'
-import { setStateDetail } from '../../actions'
 
 export interface Props {
     id: string
 }
 
 interface State {
-    SBT_SEQ_ID: string
+    STU_SEQ_ID: string,
+    SCH_SEQ_ID: string
 }
 
 class TrackingDetailScreen extends React.Component<Props, State> {
@@ -17,13 +17,14 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            SBT_SEQ_ID: props.id
+            STU_SEQ_ID: props.id,
+            SCH_SEQ_ID: props.id
         }
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().state) })
-        store.dispatch({ type: 'FETCH_STATE', payload: { SBT_SEQ_ID: this.state.SBT_SEQ_ID } })
+        store.subscribe(() => { return this.setState(store.getState().stateList) })
+        store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID, SCH_SEQ_ID: this.state.SCH_SEQ_ID } })
     }
 
     render() {

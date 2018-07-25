@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import store from '../../store'
 
 export interface Props {
@@ -7,15 +7,7 @@ export interface Props {
 }
 
 interface State {
-    SCH_NAME_TH: string,
-    TECH_NAME: string,
-    TECH_PHONE: string,
-    DRV_NAME: string,
-    DRV_PHONE: string,
-    BUS_LICENSE_PLATE: string,
-    SBT_DATE_START: string,
-    SBT_DATE_END: string,
-    SBT_STATUS: string
+    stateList: any
 }
 
 class DetailBoxComponent extends React.Component<Props, State> {
@@ -23,15 +15,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            SCH_NAME_TH: '',
-            TECH_NAME: '',
-            TECH_PHONE: '',
-            DRV_NAME: '',
-            DRV_PHONE: '',
-            BUS_LICENSE_PLATE: '',
-            SBT_DATE_START: '',
-            SBT_DATE_END: '',
-            SBT_STATUS: ''
+            stateList: []
         }
     }
 
@@ -39,35 +23,80 @@ class DetailBoxComponent extends React.Component<Props, State> {
         store.subscribe(() => { return this.setState(store.getState().state) })
     }
 
+    componentWillReceiveProps() {
+        this.setState({
+            stateList: store.getState().stateList
+        })
+    }
+
+    renderList() {
+        return (
+            this.state.stateList.map( (item: any, index: number) => {
+                return (
+                    <View key={index} style={styles.container}>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>{item.SCH_NAME_TH}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textContain}>Teacher: </Text>
+                            <Text style={styles.textContain}>{item.TECH_NAME}</Text>
+                            <Text style={styles.textContain}>{item.TECH_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textContain}>Driver: </Text>
+                            <Text style={styles.textContain}>{item.DRV_NAME}</Text>
+                            <Text style={styles.textContain}>{item.DRV_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textContain}>License plate: </Text>
+                            <Text style={styles.textContain}>{item.BUS_LICENSE_PLATE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
+                            <Text style={styles.textContain}>{item.SBT_DATE_END}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textContain}>Status: </Text>
+                            <Text style={styles.textContain}>{item.SBT_STATUS}</Text>
+                        </View>
+                    </View>
+                )
+            } )
+        )
+    }
+
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textTitle}>{this.state.SCH_NAME_TH}</Text>
-                </View>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>Teacher: </Text>
-                    <Text style={styles.textContain}>{this.state.TECH_NAME}</Text>
-                    <Text style={styles.textContain}>{this.state.TECH_PHONE}</Text>
-                </View>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>Driver: </Text>
-                    <Text style={styles.textContain}>{this.state.DRV_NAME}</Text>
-                    <Text style={styles.textContain}>{this.state.DRV_PHONE}</Text>
-                </View>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>License plate: </Text>
-                    <Text style={styles.textContain}>{this.state.BUS_LICENSE_PLATE}</Text>
-                </View>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>{this.state.SBT_DATE_START}</Text>
-                    <Text style={styles.textContain}>{this.state.SBT_DATE_END}</Text>
-                </View>
-                <View style={styles.bodyContain}>
-                    <Text style={styles.textContain}>Status: </Text>
-                    <Text style={styles.textContain}>{this.state.SBT_STATUS}</Text>
-                </View>
-            </View>
+            <ScrollView style={{flex: 1, width: '100%', flexDirection: 'column'}}>
+                {this.renderList()}
+            </ScrollView>
+            // <View style={styles.container}>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textTitle}>{this.state.SCH_NAME_TH}</Text>
+            //     </View>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textContain}>Teacher: </Text>
+            //         <Text style={styles.textContain}>{this.state.TECH_NAME}</Text>
+            //         <Text style={styles.textContain}>{this.state.TECH_PHONE}</Text>
+            //     </View>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textContain}>Driver: </Text>
+            //         <Text style={styles.textContain}>{this.state.DRV_NAME}</Text>
+            //         <Text style={styles.textContain}>{this.state.DRV_PHONE}</Text>
+            //     </View>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textContain}>License plate: </Text>
+            //         <Text style={styles.textContain}>{this.state.BUS_LICENSE_PLATE}</Text>
+            //     </View>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textContain}>{this.state.SBT_DATE_START}</Text>
+            //         <Text style={styles.textContain}>{this.state.SBT_DATE_END}</Text>
+            //     </View>
+            //     <View style={styles.bodyContain}>
+            //         <Text style={styles.textContain}>Status: </Text>
+            //         <Text style={styles.textContain}>{this.state.SBT_STATUS}</Text>
+            //     </View>
+            // </View>
         )
     }
 }

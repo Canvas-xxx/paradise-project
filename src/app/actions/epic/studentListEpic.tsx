@@ -22,8 +22,8 @@ export const fetchStudentEpic: Epic<FluxStandardAction> =action$ =>
     action$.pipe(
         ofType(FETCH_STUDENT),
         mergeMap((payload: any) =>
-            // ajax.get(`http://localhost:8099/studentDetail`, {
-            ajax.get(`http://203.121.143.61:8099/studentDetail`, {
+            ajax.get(`http://localhost:8099/studentDetail`, {
+            // ajax.get(`http://203.121.143.61:8099/studentDetail`, {
                 'Content-Type': 'application/json',
                 'id': payload.payload.STU_SEQ_ID
             })
@@ -51,8 +51,8 @@ export const fetchStudentListEpic: Epic<FluxStandardAction> =action$ =>
     action$.pipe(
         ofType(FETCH_STUDENT_LIST),
         mergeMap((payload: any) =>
-            // ajax.get(`http://localhost:8099/studentList`, {
-            ajax.get(`http://203.121.143.61:8099/studentList`, {
+            ajax.get(`http://localhost:8099/studentList`, {
+            // ajax.get(`http://203.121.143.61:8099/studentList`, {
                 'Content-Type': 'application/json',
                 'id': payload.payload.USER_PAR_SEQ_ID
             })

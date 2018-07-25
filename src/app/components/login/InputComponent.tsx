@@ -37,6 +37,7 @@ export default class InputComponent extends React.Component<Props, State> {
                     placeholder={this.state.placeholder}
                     secureTextEntry={this.state.secure}
                     autoCapitalize='none'
+                    underlineColorAndroid='transparent'
                     onChangeText={this.state.handle} />
             </View>
         )

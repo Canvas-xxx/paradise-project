@@ -9,7 +9,13 @@ export interface Props {
 }
 
 interface State {
-    stateList: any
+    BUS_LICENSE_PLATE: string,
+    TECH_NAME: string,
+    TECH_PHONE: string,
+    DRV_NAME: string,
+    DRV_PHONE: string,
+    SBT_SEQ_ID: string,
+    SCH_SEQ_ID: string
 }
 
 class CardListItemComponent extends React.Component<Props, State> {
@@ -17,58 +23,48 @@ class CardListItemComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            stateList: []
+            BUS_LICENSE_PLATE: '',
+            TECH_NAME: '',
+            TECH_PHONE: '',
+            DRV_NAME: '',
+            DRV_PHONE: '',
+            SBT_SEQ_ID: '',
+            SCH_SEQ_ID: ''
         }
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().stateList) })
-    }
-
-    componentWillReceiveProps() {
-        this.setState({
-            stateList: store.getState().stateList
-        })
-    }
-
-    renderList() {
-        return (
-            this.state.stateList.map( (item: any, index: string) => {
-                return (
-                    <View key={index} style={styles.container} >
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>License plate: </Text>
-                            <Text style={styles.detailText}>{item.BUS_LICENSE_PLATE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Teacher: </Text>
-                            <Text style={styles.detailText}>{item.TECH_NAME}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Teacher Tel: </Text>
-                            <Text style={styles.detailText}>{item.TECH_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Driver: </Text>
-                            <Text style={styles.detailText}>{item.DRV_NAME}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Driver Tel: </Text>
-                            <Text style={styles.detailText}>{item.DRV_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ id: item.SBT_SEQ_ID })}} />
-                        </View>
-                    </View>
-                )
-            })
-        )
+        store.subscribe(() => { return this.setState(store.getState().student) })
     }
 
     render() {
         return (
             <View style={styles.listContain}>
-                {this.renderList()}
+                <View style={styles.container} >
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>License plate: </Text>
+                            <Text style={styles.detailText}>{this.state.BUS_LICENSE_PLATE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Teacher: </Text>
+                            <Text style={styles.detailText}>{this.state.TECH_NAME}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Teacher Tel: </Text>
+                            <Text style={styles.detailText}>{this.state.TECH_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Driver: </Text>
+                            <Text style={styles.detailText}>{this.state.DRV_NAME}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.titleText}>Driver Tel: </Text>
+                            <Text style={styles.detailText}>{this.state.DRV_PHONE}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ id: this.state.SBT_SEQ_ID, school: this.state.SCH_SEQ_ID })}} />
+                        </View>
+                    </View>
             </View>
         )
     }
