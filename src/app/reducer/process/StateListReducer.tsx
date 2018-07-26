@@ -8,3 +8,12 @@ export const stateListReducer = (state: any = [], action: any) => {
             return state
     }
 }
+
+export const stateListRejectedReducer = (state: any = {}, action: any) => {
+    switch(action.type) {
+        case 'FETCH_STATE_LIST_REJECTED':
+            return state = action.payload
+        default:
+            return state
+    }
+}

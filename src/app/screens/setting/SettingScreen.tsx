@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import ButtonComponent from '../../components/login/ButtonComponent'
+import { Actions } from 'react-native-router-flux'
 
 export interface Props {
 
@@ -17,7 +19,7 @@ class SettingScreen extends React.Component<Props, State> {
     render() {
         return (
             <View style={styles.container}>
-                <Text>SettingPage</Text>
+                <ButtonComponent name='LOG OUT' color='#aacf68' function={() => {Actions.auth()}} />
             </View>
         )
     }
@@ -28,7 +30,9 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-start',
+        paddingTop: 30,
+        paddingBottom: 30
     }
 })
 

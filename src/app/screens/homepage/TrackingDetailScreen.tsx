@@ -4,7 +4,8 @@ import DetailBoxComponent from '../../components/home/DetailBoxComponent'
 import store from '../../store'
 
 export interface Props {
-    id: string
+    studentId: string,
+    schoolId: string
 }
 
 interface State {
@@ -17,8 +18,8 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            STU_SEQ_ID: props.id,
-            SCH_SEQ_ID: props.id
+            STU_SEQ_ID: props.studentId,
+            SCH_SEQ_ID: props.schoolId
         }
     }
 

@@ -2,7 +2,7 @@ import { combineEpics } from 'redux-observable'
 import { fetchUserEpic, fetchSenderEpic } from './epic/userEpic'
 import { fetchParentEpic } from './epic/parentEpic'
 import { fetchStudentEpic, fetchStudentListEpic } from './epic/studentListEpic'
-import { fetchStateEpic, fetchStateListEpic } from './epic/stateEpic'
+import { fetchStateListEpic } from './epic/stateEpic'
 
 const rootEpics = combineEpics(
     fetchUserEpic,
@@ -10,7 +10,7 @@ const rootEpics = combineEpics(
     fetchParentEpic,
     fetchStudentEpic,
     fetchStudentListEpic,
-    fetchStateEpic,
+    // fetchStateEpic,
     fetchStateListEpic
 )
 

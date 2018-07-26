@@ -41,7 +41,7 @@ class StudentListComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <ScrollView> 
+            <ScrollView>
                 <View style={styles.listContainer}>
                     {renderItems(this.state.studentList)}
                 </View>

@@ -14,7 +14,7 @@ interface State {
     TECH_PHONE: string,
     DRV_NAME: string,
     DRV_PHONE: string,
-    SBT_SEQ_ID: string,
+    STU_SEQ_ID: string,
     SCH_SEQ_ID: string
 }
 
@@ -28,7 +28,7 @@ class CardListItemComponent extends React.Component<Props, State> {
             TECH_PHONE: '',
             DRV_NAME: '',
             DRV_PHONE: '',
-            SBT_SEQ_ID: '',
+            STU_SEQ_ID: '',
             SCH_SEQ_ID: ''
         }
     }
@@ -62,7 +62,7 @@ class CardListItemComponent extends React.Component<Props, State> {
                             <Text style={styles.detailText}>{this.state.DRV_PHONE}</Text>
                         </View>
                         <View style={styles.bodyContain}>
-                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ id: this.state.SBT_SEQ_ID, school: this.state.SCH_SEQ_ID })}} />
+                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
                         </View>
                     </View>
             </View>
@@ -80,9 +80,11 @@ const styles = StyleSheet.create({
     container: {
         width: '90%',
         backgroundColor: 'white',
+        borderRadius: 15,
         shadowColor: 'black',
         shadowOpacity: .2,
         shadowOffset: { width: 1, height: 5 },
+        shadowRadius: 15,
         flexDirection: 'column',
         flexWrap: 'wrap',
         justifyContent: 'center',

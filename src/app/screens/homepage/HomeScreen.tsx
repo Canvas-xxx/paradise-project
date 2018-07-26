@@ -32,7 +32,7 @@ class HomeScreen extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <ProfileComponent />
-                <View style={{flex: 2}}>
+                <View style={{flex: 2, width: '100%'}}>
                     <StudentListComponent />
                 </View>
             </View>

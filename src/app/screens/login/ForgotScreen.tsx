@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import CardBox from '../../components/login/CardBox'
 import ButtonComponent from '../../components/login/ButtonComponent'
-import InputComponent from '../../components/login/InputComponent'
 
 export interface Props {
 
@@ -22,8 +21,9 @@ class ForgotScreen extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <CardBox>
-                    <InputComponent icon='email' placeholder='Your email address' secure={false} />
-                    <ButtonComponent name='SEND TO EMAIL' color='#aacf68' function={() => {}} />
+                    <View style={{height: 30}}>
+                        <Text style={styles.text}>Please contact us: paradisex.safety@gmail.com</Text>
+                    </View>
                     <ButtonComponent name='BACK' color='lightgrey' function={() => {Actions.pop()}} />
                 </CardBox>
             </View>
@@ -37,6 +37,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#e6eaab'
+    },
+    text: {
+        fontSize: 14
     }
 })
 

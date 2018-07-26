@@ -30,8 +30,8 @@ export const fetchUserEpic: Epic<FluxStandardAction> = action$ =>
     action$.pipe(
         ofType(FETCH_USER),
         mergeMap((payload: any) =>
-            ajax.post(`http://localhost:8099/authenticationLogin`,{
-            // ajax.post(`http://203.121.143.61:8099/authenticationLogin`,{
+            // ajax.post(`http://localhost:8099/authenticationLogin`,{
+            ajax.post(`http://203.121.143.61:8099/authenticationLogin`,{
                 username: payload.payload.username,
                 password: payload.payload.password
             })
@@ -51,8 +51,8 @@ export const fetchSenderEpic: Epic<FluxStandardAction> = action$ =>
     action$.pipe(
         ofType(FETCH_SENDER),
         mergeMap((payload: any) =>
-            ajax.post(`http://localhost:8099/updateSenderID`,{
-            // ajax.post(`http://203.121.143.61:8099/updateSenderID`,{
+            // ajax.post(`http://localhost:8099/updateSenderID`,{
+            ajax.post(`http://203.121.143.61:8099/updateSenderID`,{
                 username: payload.payload.username,
                 senderId: payload.payload.senderId
             })

@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         flexBasis: '50%',
         width: '50%',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     cardBox: {
         width: '90%',
@@ -57,7 +57,11 @@ const styles = StyleSheet.create({
         flexDirection : 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 20
+        borderRadius: 15,
+        shadowColor: 'black',
+        shadowOpacity: .2,
+        shadowOffset: { width: 0, height: 5 },
+        shadowRadius: 15,
     },
     cardText: {
         fontSize: 14,

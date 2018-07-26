@@ -22,8 +22,8 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
   action$.pipe(
       ofType(FETCH_STATE_LIST),
       mergeMap((payload: any) =>
-        ajax.get(`http://localhost:8099/stateDetail`, {
-        // ajax.get(`http://203.121.143.61:8099/stateDetail`, {
+        // ajax.get(`http://localhost:8099/stateDetail`, {
+        ajax.get(`http://203.121.143.61:8099/stateDetail`, {
             'Content-Type': 'application/json',
             'studentId': payload.payload.STU_SEQ_ID,
             'schoolId': payload.payload.SCH_SEQ_ID
@@ -40,31 +40,31 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
       )
   )
 
-  const FETCH_STATE = 'FETCH_STATE'
-  const FETCH_STATE_FULFILLED = 'FETCH_STATE_FULFILLED'
-  const FETCH_STATE_REJECTED = 'FETCH_STATE_REJECTED'
+//   const FETCH_STATE = 'FETCH_STATE'
+//   const FETCH_STATE_FULFILLED = 'FETCH_STATE_FULFILLED'
+//   const FETCH_STATE_REJECTED = 'FETCH_STATE_REJECTED'
   
-  export const fetchState = () => ({ type: FETCH_STATE })
-  export const fetchStateFulfilled = (payload:  Object) => ({ type: FETCH_STATE_FULFILLED, payload: payload })
-  export const fetchStateRejected = (error: any) => ({ type: FETCH_STATE_REJECTED, payload: error, error: true })
+//   export const fetchState = () => ({ type: FETCH_STATE })
+//   export const fetchStateFulfilled = (payload:  Object) => ({ type: FETCH_STATE_FULFILLED, payload: payload })
+//   export const fetchStateRejected = (error: any) => ({ type: FETCH_STATE_REJECTED, payload: error, error: true })
   
-  export const fetchStateEpic: Epic<FluxStandardAction> =action$ =>
-    action$.pipe(
-        ofType(FETCH_STATE),
-        mergeMap((payload: any) =>
-          ajax.get(`http://localhost:8099/stateDetail`, {
-            // ajax.get(`http://203.121.143.61:8099/stateDetail`, {
-              'Content-Type': 'application/json',
-              'id': payload.payload.STU_SEQ_ID,
-          })
-          .pipe(
-              map( response =>
-                  fetchStateFulfilled(response.response)
-              ),
-              catchError( (error) => of(fetchStateRejected({
-                  status: error.status,
-                  message: error.response.message
-              })))
-          )
-        )
-    )
+//   export const fetchStateEpic: Epic<FluxStandardAction> =action$ =>
+//     action$.pipe(
+//         ofType(FETCH_STATE),
+//         mergeMap((payload: any) =>
+//           ajax.get(`http://localhost:8099/stateDetail`, {
+//             // ajax.get(`http://203.121.143.61:8099/stateDetail`, {
+//               'Content-Type': 'application/json',
+//               'id': payload.payload.STU_SEQ_ID,
+//           })
+//           .pipe(
+//               map( response =>
+//                   fetchStateFulfilled(response.response)
+//               ),
+//               catchError( (error) => of(fetchStateRejected({
+//                   status: error.status,
+//                   message: error.response.message
+//               })))
+//           )
+//         )
+//     )

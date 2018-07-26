@@ -19,45 +19,50 @@ class DetailBoxComponent extends React.Component<Props, State> {
         }
     }
 
+    objectList: Object = [{
+        SCH_NAME_TH: 'No data.',
+        TECH_NAME: 'No data.',
+        TECH_PHONE: 'No data.',
+        DRV_NAME: 'No data.',
+        DRV_PHONE: 'No data.',
+        BUS_LICENSE_PLATE: 'No data.',
+        SBT_DATE_START: 'No data.',
+        SBT_DATE_END: 'No data.',
+        SBT_STATUS: 'No data.'
+    }]
+
     componentDidMount() {
         store.subscribe(() => { return this.setState(store.getState().state) })
     }
 
     componentWillReceiveProps() {
-        this.setState({
-            stateList: store.getState().stateList
-        })
+        if (store.getState().stateList.length > 0) {
+            this.setState({
+                stateList: store.getState().stateList
+            })
+        } else {
+            this.setState({
+                stateList: this.objectList
+            })
+        }
     }
 
     renderList() {
         return (
             this.state.stateList.map( (item: any, index: number) => {
                 return (
-                    <View key={index} style={styles.container}>
+                    <View key={index}>
                         <View style={styles.bodyContain}>
-                            <Text style={styles.textTitle}>{item.SCH_NAME_TH}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textContain}>Teacher: </Text>
-                            <Text style={styles.textContain}>{item.TECH_NAME}</Text>
-                            <Text style={styles.textContain}>{item.TECH_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textContain}>Driver: </Text>
-                            <Text style={styles.textContain}>{item.DRV_NAME}</Text>
-                            <Text style={styles.textContain}>{item.DRV_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textContain}>License plate: </Text>
-                            <Text style={styles.textContain}>{item.BUS_LICENSE_PLATE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
-                            <Text style={styles.textContain}>{item.SBT_DATE_END}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textContain}>Status: </Text>
+                            <Text style={styles.textTitle}>Status: </Text>
                             <Text style={styles.textContain}>{item.SBT_STATUS}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>Date: </Text>
+                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>Time: </Text>
+                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
                         </View>
                     </View>
                 )
@@ -67,36 +72,9 @@ class DetailBoxComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <ScrollView style={{flex: 1, width: '100%', flexDirection: 'column'}}>
+            <View style={styles.container}>
                 {this.renderList()}
-            </ScrollView>
-            // <View style={styles.container}>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textTitle}>{this.state.SCH_NAME_TH}</Text>
-            //     </View>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textContain}>Teacher: </Text>
-            //         <Text style={styles.textContain}>{this.state.TECH_NAME}</Text>
-            //         <Text style={styles.textContain}>{this.state.TECH_PHONE}</Text>
-            //     </View>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textContain}>Driver: </Text>
-            //         <Text style={styles.textContain}>{this.state.DRV_NAME}</Text>
-            //         <Text style={styles.textContain}>{this.state.DRV_PHONE}</Text>
-            //     </View>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textContain}>License plate: </Text>
-            //         <Text style={styles.textContain}>{this.state.BUS_LICENSE_PLATE}</Text>
-            //     </View>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textContain}>{this.state.SBT_DATE_START}</Text>
-            //         <Text style={styles.textContain}>{this.state.SBT_DATE_END}</Text>
-            //     </View>
-            //     <View style={styles.bodyContain}>
-            //         <Text style={styles.textContain}>Status: </Text>
-            //         <Text style={styles.textContain}>{this.state.SBT_STATUS}</Text>
-            //     </View>
-            // </View>
+            </View>
         )
     }
 }
@@ -123,17 +101,19 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         marginTop: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10
     },
     textTitle: {
         flex: 1,
-        textAlign: 'center',
+        textAlign: 'left',
         fontSize: 16,
         fontWeight: 'bold'
     },
     textContain: {
         flex: 1,
-        textAlign: 'center'
+        textAlign: 'left'
     }
 })
 

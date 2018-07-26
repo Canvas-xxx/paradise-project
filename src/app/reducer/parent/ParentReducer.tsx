@@ -8,3 +8,12 @@ export const parentReducer = (state: any = {}, action: any) => {
             return state
     }
 }
+
+export const parentRejectedReducer = (state: any = {}, action: any) => {
+    switch(action.type) {
+        case 'FETCH_PARENT_REJECTED':
+            return state = action.payload
+        default:
+            return state
+    }
+}
