@@ -9,7 +9,6 @@ import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
 import store from './src/app/store'
-import { setSender } from './src/app/actions'
 
 export default class App extends Component {
 
@@ -27,6 +26,11 @@ export default class App extends Component {
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
+    OneSignal.configure()
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('ids', this.onIds);
   }
 
   onReceived(notification: any) {
@@ -43,7 +47,8 @@ export default class App extends Component {
   }
 
   onIds(device: any) {
-    console.log('Device info: ', device);
+    store.dispatch({ type: 'SET_SENDER_ID', payload: device.userId })
+    // console.log('Device info: ', device);
   }
 
   render() {

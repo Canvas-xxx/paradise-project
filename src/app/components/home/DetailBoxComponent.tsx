@@ -20,15 +20,8 @@ class DetailBoxComponent extends React.Component<Props, State> {
     }
 
     objectList: Object = [{
-        SCH_NAME_TH: 'No data.',
-        TECH_NAME: 'No data.',
-        TECH_PHONE: 'No data.',
-        DRV_NAME: 'No data.',
-        DRV_PHONE: 'No data.',
-        BUS_LICENSE_PLATE: 'No data.',
-        SBT_DATE_START: 'No data.',
-        SBT_DATE_END: 'No data.',
-        SBT_STATUS: 'No data.'
+        Status: 'No data.',
+        STX_CREATE_DATE: 'No data.'
     }]
 
     componentDidMount() {
@@ -47,22 +40,32 @@ class DetailBoxComponent extends React.Component<Props, State> {
         }
     }
 
+    renderDateFormat(date: any) {
+        if(date) {
+            const newDate = new Date(date)
+            const dd = (newDate.getDate().toString().length === 1 ? '0' + newDate.getDate() : newDate.getDate()).toString()
+            const mm = (newDate.getMonth().toString().length === 1 ? '0' + newDate.getMonth() : newDate.getMonth()).toString()
+            const yyyy = newDate.getFullYear().toString()
+            const hours = (newDate.getHours().toString().length === 1 ? '0' + newDate.getHours() : newDate.getHours()).toString()
+            const minutes = (newDate.getMinutes().toString().length === 1 ? '0' + newDate.getMinutes() : newDate.getMinutes()).toString()
+            return dd + '/' + mm + '/' + yyyy + ' ' + (parseInt(hours) > 11 ? hours + ':' + minutes + ' pm.' : hours + ':' + minutes + ' am.')
+        } else {
+            return ''
+        }
+    }
+
     renderList() {
         return (
             this.state.stateList.map( (item: any, index: number) => {
                 return (
-                    <View key={index}>
+                    <View key={index} style={styles.container}>
                         <View style={styles.bodyContain}>
                             <Text style={styles.textTitle}>Status: </Text>
-                            <Text style={styles.textContain}>{item.SBT_STATUS}</Text>
+                            <Text style={styles.textContain}>{item.Status}</Text>
                         </View>
                         <View style={styles.bodyContain}>
                             <Text style={styles.textTitle}>Date: </Text>
-                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.textTitle}>Time: </Text>
-                            <Text style={styles.textContain}>{item.SBT_DATE_START}</Text>
+                            <Text style={styles.textContain}>{this.renderDateFormat(item.STX_CREATE_DATE)}</Text>
                         </View>
                     </View>
                 )
@@ -72,7 +75,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={{flex: 1, flexDirection: 'column'}}>
                 {this.renderList()}
             </View>
         )
@@ -112,7 +115,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     textContain: {
-        flex: 1,
+        flex: 2,
         textAlign: 'left'
     }
 })

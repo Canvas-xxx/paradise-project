@@ -31,9 +31,15 @@ class ProfileComponent extends React.Component<Props, State> {
     }
 
     componentWillReceiveProps() {
-        this.setState({
-            Avatar: store.getState().parent.PAR_NAME.split(' ')[0][0] + store.getState().parent.PAR_NAME.split(' ')[1][0]
-        })
+        if(store.getState().parent.PAR_NAME) {
+            this.setState({
+                Avatar: store.getState().parent.PAR_NAME.split(' ')[0][0] + store.getState().parent.PAR_NAME.split(' ')[1][0]
+            })
+        } else {
+            this.setState({
+                Avatar: ''
+            })
+        }
     }
 
     render() {

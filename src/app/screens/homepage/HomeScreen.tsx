@@ -25,7 +25,6 @@ class HomeScreen extends React.Component<Props, State> {
         store.subscribe(() => { return this.setState(store.getState().user) })
         store.dispatch({ type: 'FETCH_PARENT', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
         store.dispatch({ type: 'FETCH_STUDENT_LIST', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
-        // store.dispatch({ type: 'FETCH_SENDER', payload: { username: store.getState().user.USER_ID, senderId: 'd11c2012-9e84-4d92-b43f-ccadbaba7566' } })
     }
 
     render() {

@@ -22,7 +22,7 @@ class ForgotScreen extends React.Component<Props, State> {
             <View style={styles.container}>
                 <CardBox>
                     <View style={{height: 30}}>
-                        <Text style={styles.text}>Please contact us: paradisex.safety@gmail.com</Text>
+                        <Text style={styles.text}>Please contact your school for information.</Text>
                     </View>
                     <ButtonComponent name='BACK' color='lightgrey' function={() => {Actions.pop()}} />
                 </CardBox>

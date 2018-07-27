@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { Buffer } from 'buffer'
 import CardBox from '../../components/login/CardBox'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
@@ -13,7 +14,9 @@ export interface Props {
 interface State {
     username: string,
     password: string,
-    USER_PAR_SEQ_ID: string
+    USER_PAR_SEQ_ID: string,
+    user: any,
+    senderId: string
 }
 
 class LoginScreen extends React.Component<Props, State> {
@@ -23,7 +26,9 @@ class LoginScreen extends React.Component<Props, State> {
         this.state = {
             username: '',
             password: '',
-            USER_PAR_SEQ_ID: ''
+            USER_PAR_SEQ_ID: '',
+            user: {},
+            senderId: ''
         }
     }
 
@@ -32,19 +37,21 @@ class LoginScreen extends React.Component<Props, State> {
             type: 'FETCH_USER',
             payload: {
                 username: this.state.username,
-                password: this.state.password 
+                password: new Buffer(this.state.password).toString('base64')
             }
         })
         const that = this
         setTimeout( function() {
             if (store.getState().user['USER_ID']) {
-                Actions.home({ id: that.state.USER_PAR_SEQ_ID })
+                store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
+                Actions.home({ id: that.state.user.USER_PAR_SEQ_ID })
             }
         }, 1000)
     }
 
     componentWillMount() {
-        store.subscribe(() => { return this.setState(store.getState().user) })
+        store.subscribe(() => { return this.setState(store.getState()) })
+        store.dispatch({ type: '' })
     }
 
     render() {

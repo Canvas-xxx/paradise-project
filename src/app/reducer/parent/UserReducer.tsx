@@ -9,6 +9,15 @@ export const userReducer = (state: any = {}, action: any) => {
     }
 }
 
+export const senderIdReducer = (state: string = '', action: any) => {
+    switch(action.type) {
+        case 'SET_SENDER_ID':
+            return state = action.payload
+        default:
+            return state
+    }
+}
+
 export const senderReducer = (state: any = {}, action: any) => {
     switch(action.type) {
         case 'FETCH_SENDER':

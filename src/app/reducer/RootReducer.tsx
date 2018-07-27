@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { userReducer, userRejectedReducer } from './parent/UserReducer'
+import { userReducer, senderIdReducer, senderReducer, userRejectedReducer } from './parent/UserReducer'
 import { parentReducer } from './parent/ParentReducer'
 import { studentReducer } from './student/StudentReducer'
 import { studentListReducer } from './student/StudentListReducer'
@@ -13,5 +13,7 @@ export default combineReducers({
     student: studentReducer,
     studentList: studentListReducer,
     state: stateReducer,
-    stateList: stateListReducer
+    stateList: stateListReducer,
+    senderId: senderIdReducer,
+    sender: senderReducer
 })
