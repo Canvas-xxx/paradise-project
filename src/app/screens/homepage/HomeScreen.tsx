@@ -1,11 +1,11 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, AsyncStorage } from 'react-native'
 import ProfileComponent from '../../components/home/ProfileComponent'
 import StudentListComponent from '../../components/home/StudentListComponent'
 import store from '../../store'
 
 export interface Props {
-    id: string
+    
 }
 
 interface State {
@@ -17,14 +17,19 @@ class HomeScreen extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            USER_PAR_SEQ_ID: props.id
+            USER_PAR_SEQ_ID: ''
         }
     }
 
     componentWillMount() {
-        store.subscribe(() => { return this.setState(store.getState().user) })
-        store.dispatch({ type: 'FETCH_PARENT', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
-        store.dispatch({ type: 'FETCH_STUDENT_LIST', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
+        AsyncStorage.getItem('id').then((user) => {
+            if(user) {
+                this.setState({USER_PAR_SEQ_ID: user})
+                store.subscribe(() => { return this.setState(store.getState().user) })
+                store.dispatch({ type: 'FETCH_PARENT', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
+                store.dispatch({ type: 'FETCH_STUDENT_LIST', payload: { USER_PAR_SEQ_ID: this.state.USER_PAR_SEQ_ID } })
+            }
+        })
     }
 
     render() {

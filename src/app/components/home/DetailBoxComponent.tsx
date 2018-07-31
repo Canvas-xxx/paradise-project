@@ -41,7 +41,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
     }
 
     renderDateFormat(date: any) {
-        if(date) {
+        if(date !== 'No data.') {
             const newDate = new Date(date)
             const dd = (newDate.getDate().toString().length === 1 ? '0' + newDate.getDate() : newDate.getDate()).toString()
             const mm = (newDate.getMonth().toString().length === 1 ? '0' + newDate.getMonth() : newDate.getMonth()).toString()
@@ -50,7 +50,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
             const minutes = (newDate.getMinutes().toString().length === 1 ? '0' + newDate.getMinutes() : newDate.getMinutes()).toString()
             return dd + '/' + mm + '/' + yyyy + ' ' + (parseInt(hours) > 11 ? hours + ':' + minutes + ' pm.' : hours + ':' + minutes + ' am.')
         } else {
-            return ''
+            return date
         }
     }
 

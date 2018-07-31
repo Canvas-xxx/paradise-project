@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Buffer } from 'buffer'
 import CardBox from '../../components/login/CardBox'
@@ -43,8 +43,13 @@ class LoginScreen extends React.Component<Props, State> {
         const that = this
         setTimeout( function() {
             if (store.getState().user['USER_ID']) {
-                store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
-                Actions.home({ id: that.state.user.USER_PAR_SEQ_ID })
+                AsyncStorage.setItem('id', that.state.user.USER_PAR_SEQ_ID.toString())
+                AsyncStorage.getItem('id').then((user) => {
+                    if(user) {
+                        store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
+                        Actions.home()
+                    }
+                })
             }
         }, 1000)
     }

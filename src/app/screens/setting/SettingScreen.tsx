@@ -1,8 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import { ajax } from 'rxjs/ajax'
-import { map, catchError } from 'rxjs/operators'
 import { Buffer } from 'buffer'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
@@ -33,6 +31,7 @@ class SettingScreen extends React.Component<Props, State> {
     }
 
     logoutUser() {
+        AsyncStorage.removeItem('id')
         store.dispatch({ type: 'FETCH_SENDER', payload: { username: this.state.USER_ID, senderId: '' } })
         Actions.auth()
     }

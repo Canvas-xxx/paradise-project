@@ -21,7 +21,7 @@ class ForgotScreen extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <CardBox>
-                    <View style={{height: 30}}>
+                    <View style={styles.textContain}>
                         <Text style={styles.text}>Please contact your school for information.</Text>
                     </View>
                     <ButtonComponent name='BACK' color='lightgrey' function={() => {Actions.pop()}} />
@@ -37,6 +37,14 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         backgroundColor: '#e6eaab'
+    },
+    textContain: {
+        backgroundColor: 'transparent',
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20
     },
     text: {
         fontSize: 14
