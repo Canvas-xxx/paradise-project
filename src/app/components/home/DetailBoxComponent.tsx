@@ -54,6 +54,39 @@ class DetailBoxComponent extends React.Component<Props, State> {
         }
     }
 
+    renderName() {
+        try {
+            if (this.state.stateList[0].STU_NAME_TH !== undefined) {
+                return (
+                    <View style={styles.container}>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>Name: </Text>
+                            <Text style={styles.textContain}>{this.state.stateList[0].STU_NAME_TH}</Text>
+                        </View>
+                    </View>
+                )
+            } else {
+                return (
+                    <View style={styles.container}>
+                        <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>Name: </Text>
+                            <Text style={styles.textContain}>No Data.</Text>
+                        </View>
+                    </View>
+                )
+            }
+        } catch(e) {
+            return (
+                <View style={styles.container}>
+                    <View style={styles.bodyContain}>
+                        <Text style={styles.textTitle}>Name: </Text>
+                        <Text style={styles.textContain}>No Data.</Text>
+                    </View>
+                </View>
+            )
+        }
+    }
+
     renderList() {
         return (
             this.state.stateList.map( (item: any, index: number) => {
@@ -76,6 +109,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column'}}>
+                {this.renderName()}
                 {this.renderList()}
             </View>
         )

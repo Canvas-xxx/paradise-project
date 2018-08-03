@@ -42,14 +42,18 @@ class LoginScreen extends React.Component<Props, State> {
         })
         const that = this
         setTimeout( function() {
-            if (store.getState().user['USER_ID']) {
-                AsyncStorage.setItem('id', that.state.user.USER_PAR_SEQ_ID.toString())
-                AsyncStorage.getItem('id').then((user) => {
-                    if(user) {
-                        store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
-                        Actions.home()
-                    }
-                })
+            try {
+                if (store.getState().user['USER_ID']) {
+                    AsyncStorage.setItem('id', that.state.user.USER_PAR_SEQ_ID.toString())
+                    AsyncStorage.getItem('id').then((user) => {
+                        if(user) {
+                            store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
+                            Actions.home()
+                        }
+                    })
+                }
+            } catch(e) {
+                console.log(e)
             }
         }, 1000)
     }

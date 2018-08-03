@@ -9,6 +9,7 @@ import RouterComponent from './src/app/router'
 import OneSignal from 'react-native-onesignal'
 import { Provider } from 'react-redux'
 import store from './src/app/store'
+import { Actions } from 'react-native-router-flux';
 
 export default class App extends Component {
 
@@ -44,6 +45,7 @@ export default class App extends Component {
     console.log('Data: ', openResult.notification.payload.additionalData);
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
+    Actions.trackingDetail({ studentId: '1', schoolId: '1' })
   }
 
   onIds(device: any) {

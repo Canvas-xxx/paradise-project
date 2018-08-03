@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Button } from 'react-native-elements'
+import { Button, Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
+import Communications from 'react-native-communications'
 import store from '../../store'
 
 export interface Props {
@@ -41,30 +42,42 @@ class CardListItemComponent extends React.Component<Props, State> {
         return (
             <View style={styles.listContain}>
                 <View style={styles.container} >
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>License plate: </Text>
-                            <Text style={styles.detailText}>{this.state.BUS_LICENSE_PLATE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Teacher: </Text>
-                            <Text style={styles.detailText}>{this.state.TECH_NAME}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Teacher Tel: </Text>
-                            <Text style={styles.detailText}>{this.state.TECH_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Driver: </Text>
-                            <Text style={styles.detailText}>{this.state.DRV_NAME}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Text style={styles.titleText}>Driver Tel: </Text>
-                            <Text style={styles.detailText}>{this.state.DRV_PHONE}</Text>
-                        </View>
-                        <View style={styles.bodyContain}>
-                            <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
-                        </View>
+                    <View style={styles.bodyContain}>
+                        <Text style={styles.titleText}>License plate: </Text>
+                        <Text style={styles.detailText}>{this.state.BUS_LICENSE_PLATE}</Text>
                     </View>
+                    <View style={styles.bodyContain}>
+                        <Text style={styles.titleText}>Teacher: </Text>
+                        <Text style={styles.detailText}>{this.state.TECH_NAME}</Text>
+                    </View>
+                    <View style={styles.bodyContain}>
+                        {/* <Text style={styles.titleText}>Teacher Tel: </Text> */}
+                        <View style={{flex: 1, alignItems: 'flex-start'}}>
+                            <Icon iconStyle={styles.iconStyle} name="contact-phone" />
+                        </View>
+                        <Text style={styles.phonText}
+                            onPress={() => {Communications.phonecall(this.state.TECH_PHONE, true)}}>
+                            {this.state.TECH_PHONE}
+                        </Text>
+                    </View>
+                    <View style={styles.bodyContain}>
+                        <Text style={styles.titleText}>Driver: </Text>
+                        <Text style={styles.detailText}>{this.state.DRV_NAME}</Text>
+                    </View>
+                    <View style={styles.bodyContain}>
+                        {/* <Text style={styles.titleText}>Driver Tel: </Text> */}
+                        <View style={{flex: 1, alignItems: 'flex-start'}}>
+                            <Icon iconStyle={styles.iconStyle} name="contact-phone" />
+                        </View>
+                        <Text style={styles.phonText} 
+                            onPress={() => {Communications.phonecall(this.state.DRV_PHONE, true)}}>
+                            {this.state.DRV_PHONE}
+                        </Text>
+                    </View>
+                    <View style={styles.bodyContain}>
+                        <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
+                    </View>
+                </View>
             </View>
         )
     }
@@ -110,10 +123,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
+    iconStyle: {
+        fontSize: 25,
+        color: '#212121',
+        textAlign: 'left'
+    },
     detailText: {
         flex: 1,
         textAlign: 'left',
         fontSize: 14
+    },
+    phonText: {
+        flex: 1,
+        textAlign: 'left',
+        fontSize: 14,
+        textDecorationLine: 'underline',
+        color: 'blue'
     }
 })
 

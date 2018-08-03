@@ -9,7 +9,6 @@ export interface Props {
 
 interface State {
     PAR_NAME: string,
-    PAR_PHONE: string,
     Avatar: string
 }
 
@@ -19,7 +18,6 @@ class ProfileComponent extends React.Component<Props, State> {
 
         this.state = {
             PAR_NAME: '',
-            PAR_PHONE: '',
             Avatar: ''
         }
     }
@@ -47,8 +45,7 @@ class ProfileComponent extends React.Component<Props, State> {
             <View style={styles.container}>
                 <Avatar large rounded title={this.state.Avatar} />
                 <View style={styles.detailContainer}>
-                    <Text style={styles.nameText}>{this.state.PAR_NAME}</Text>
-                    <Text style={styles.nameText}>{this.state.PAR_PHONE}</Text>
+                    <Text style={styles.nameText}>Name: {this.state.PAR_NAME}</Text>
                 </View>
             </View>
         )
