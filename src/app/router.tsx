@@ -46,7 +46,7 @@ class RouterComponent extends React.Component<Props, State> {
                 return (
                     <Router>
                         <Stack key='root'>
-                            <Scene key='auth' hideNavBar={true} initial={!this.state.authen}>
+                            <Scene key='auth' hideNavBar={true} initial={!this.state.authen} swipeEnabled={false} panHandlers={null}>
                                 <Scene key='login' component={LoginScreen} hideNavBar={true} />
                                 <Scene key='forgot' component={ForgotScreen} hideNavBar={true} />
                             </Scene>

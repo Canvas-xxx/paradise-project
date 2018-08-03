@@ -43,11 +43,11 @@ class DetailBoxComponent extends React.Component<Props, State> {
     renderDateFormat(date: any) {
         if(date !== 'No data.') {
             const newDate = new Date(date)
-            const dd = (newDate.getDate().toString().length === 1 ? '0' + newDate.getDate() : newDate.getDate()).toString()
-            const mm = (newDate.getMonth().toString().length === 1 ? '0' + newDate.getMonth() : newDate.getMonth()).toString()
-            const yyyy = newDate.getFullYear().toString()
-            const hours = (newDate.getHours().toString().length === 1 ? '0' + newDate.getHours() : newDate.getHours()).toString()
-            const minutes = (newDate.getMinutes().toString().length === 1 ? '0' + newDate.getMinutes() : newDate.getMinutes()).toString()
+            const dd = (newDate.getUTCDate() < 10 ? '0' + newDate.getUTCDate() : newDate.getUTCDate()).toString()
+            const mm = ((newDate.getUTCMonth() + 1) < 10 ? '0' + (newDate.getUTCMonth() + 1) : newDate.getUTCMonth()).toString()
+            const yyyy = newDate.getUTCFullYear().toString()
+            const hours = (newDate.getUTCHours() < 10 ? '0' + newDate.getUTCHours() : newDate.getUTCHours()).toString()
+            const minutes = (newDate.getUTCMinutes() < 10 ? '0' + newDate.getUTCMinutes() : newDate.getUTCMinutes()).toString()
             return dd + '/' + mm + '/' + yyyy + ' ' + (parseInt(hours) > 11 ? hours + ':' + minutes + ' pm.' : hours + ':' + minutes + ' am.')
         } else {
             return date

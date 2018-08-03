@@ -9,7 +9,7 @@ export interface Props {
 
 interface State {
     SCH_NAME_TH: string,
-    STU_RFID_SEQ_ID: string,
+    STU_SEQ_ID: string,
     STU_NAME_TH: string,
     STU_CLASS: string
 }
@@ -20,7 +20,7 @@ class TrackingCardComponent extends React.Component<Props, State> {
 
         this.state = {
             SCH_NAME_TH: '',
-            STU_RFID_SEQ_ID: '',
+            STU_SEQ_ID: '',
             STU_NAME_TH: '',
             STU_CLASS: ''
         }
@@ -47,7 +47,7 @@ class TrackingCardComponent extends React.Component<Props, State> {
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student ID: </Text>
-                            <Text style={styles.rightDetail}>{this.state.STU_RFID_SEQ_ID}</Text>
+                            <Text style={styles.rightDetail}>{this.state.STU_SEQ_ID}</Text>
                         </View>
                         <View style={styles.textContain}>
                             <Text style={styles.rightTitle}>Student Name: </Text>
