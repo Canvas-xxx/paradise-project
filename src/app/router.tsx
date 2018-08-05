@@ -1,6 +1,6 @@
 import React from 'react'
 import { Platform, ActivityIndicator, AsyncStorage } from 'react-native'
-import { Router, Scene, Stack } from 'react-native-router-flux'
+import { Router, Scene, Stack, ActionConst } from 'react-native-router-flux'
 import { Icon } from 'react-native-elements'
 import LoginScreen from './screens/login/LoginScreen'
 import ForgotScreen from './screens/login/ForgotScreen'
@@ -99,7 +99,7 @@ class RouterComponent extends React.Component<Props, State> {
                 return (
                     <Router>
                         <Stack key='root'>
-                            <Scene key='auth' hideNavBar={true} initial={!this.state.authen} swipeEnabled={false} panHandlers={null}>
+                            <Scene key='auth' hideNavBar={true} initial={!this.state.authen} type={ActionConst.RESET}>
                                 <Scene key='login' component={LoginScreen} hideNavBar={true} />
                                 <Scene key='forgot' component={ForgotScreen} hideNavBar={true} />
                             </Scene>

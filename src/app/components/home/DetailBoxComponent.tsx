@@ -24,8 +24,10 @@ class DetailBoxComponent extends React.Component<Props, State> {
         STX_CREATE_DATE: 'No data.'
     }]
 
+    unsubscribe: any
+
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().state) })
+        this.unsubscribe = store.subscribe(() => { return this.setState(store.getState().state) })
     }
 
     componentWillReceiveProps() {
@@ -38,6 +40,10 @@ class DetailBoxComponent extends React.Component<Props, State> {
                 stateList: this.objectList
             })
         }
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe()
     }
 
     renderDateFormat(date: any) {

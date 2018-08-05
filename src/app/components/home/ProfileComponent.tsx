@@ -45,21 +45,24 @@ class ProfileComponent extends React.Component<Props, State> {
             <View style={styles.container}>
                 <Avatar large rounded title={this.state.Avatar} />
                 <View style={styles.detailContainer}>
-                    <Text style={styles.nameText}>Name: {this.state.PAR_NAME}</Text>
+                    {renderName(this.state.PAR_NAME)}
                 </View>
             </View>
         )
     }
 }
 
-const renderAvartar = (image: any, title: string) => {
-    switch(image) {
-        case null:
-            return ( <Avatar large rounded title={title} /> )
-        default:
-            return ( <Avatar large rounded title={title} source={{uri: image}} /> )
+const renderName = (name: string) => {
+    if(name.length > 0){
+        return (
+            <Text style={styles.nameText}>Name: {name}</Text> 
+        )
+    } else {
+        return (
+            <Text style={styles.nameText}></Text>
+        )
     }
-} 
+}
 
 const styles = StyleSheet.create({
     container: {

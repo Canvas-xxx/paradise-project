@@ -14,9 +14,12 @@ export interface Props {
 interface State {
     username: string,
     password: string,
+    senderId: string,
+    USER_ID: string,
+    USER_PASS: string,
     USER_PAR_SEQ_ID: string,
-    user: any,
-    senderId: string
+    USER_SCH_SEQ_ID: string,
+    updateSender: boolean
 }
 
 class LoginScreen extends React.Component<Props, State> {
@@ -26,9 +29,12 @@ class LoginScreen extends React.Component<Props, State> {
         this.state = {
             username: '',
             password: '',
+            senderId: '',
+            USER_ID: '',
+            USER_PASS: '',
             USER_PAR_SEQ_ID: '',
-            user: {},
-            senderId: ''
+            USER_SCH_SEQ_ID: '',
+            updateSender: false
         }
     }
 
@@ -40,27 +46,42 @@ class LoginScreen extends React.Component<Props, State> {
                 password: new Buffer(this.state.password).toString('base64')
             }
         })
-        const that = this
-        setTimeout( function() {
-            try {
-                if (store.getState().user['USER_ID']) {
-                    AsyncStorage.setItem('id', that.state.user.USER_PAR_SEQ_ID.toString())
-                    AsyncStorage.getItem('id').then((user) => {
-                        if(user) {
-                            store.dispatch({ type: 'FETCH_SENDER', payload: { username: that.state.username, senderId: that.state.senderId } })
-                            Actions.home()
-                        }
-                    })
-                }
-            } catch(e) {
-                console.log(e)
-            }
-        }, 1000)
     }
 
     componentWillMount() {
-        store.subscribe(() => { return this.setState(store.getState()) })
-        store.dispatch({ type: '' })
+        store.subscribe(() => { return this.setState(store.getState().user) })
+        store.subscribe(() => { return this.setState({ senderId: store.getState().senderId }) })
+    }
+
+    componentDidUpdate() {
+        if(this.state.USER_ID.length > 0) {
+            AsyncStorage.setItem('id', JSON.stringify({
+                id: this.state.USER_PAR_SEQ_ID,
+                username: this.state.USER_ID,
+                password: this.state.USER_PASS
+            }))
+            AsyncStorage.setItem('user', JSON.stringify({
+                username: this.state.USER_ID,
+                senderId: this.state.senderId,
+                schoolId: this.state.USER_SCH_SEQ_ID,
+                parentId: this.state.USER_PAR_SEQ_ID
+            }))
+            if(!this.state.updateSender) {
+                store.dispatch({
+                    type: 'FETCH_SENDER',
+                    payload: { 
+                        username: this.state.USER_ID,
+                        senderId: this.state.senderId,
+                        schoolId: this.state.USER_SCH_SEQ_ID,
+                        parentId: this.state.USER_PAR_SEQ_ID
+                    } 
+                })
+                this.setState({
+                    updateSender: true
+                })
+            }
+            Actions.home()
+        }
     }
 
     render() {

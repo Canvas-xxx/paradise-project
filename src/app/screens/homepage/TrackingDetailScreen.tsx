@@ -23,9 +23,15 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         }
     }
 
+    unsubscribe: any
+
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().stateList) })
+        this.unsubscribe = store.subscribe(() => { return this.setState(store.getState().stateList) })
         store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID, SCH_SEQ_ID: this.state.SCH_SEQ_ID } })
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe()
     }
 
     render() {

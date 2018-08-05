@@ -37,3 +37,12 @@ export const userRejectedReducer = (state: any = {}, action: any) => {
             return state
     }
 }
+
+export const senderRejectedReducer = (state: any = {}, action: any) => {
+    switch(action.type) {
+        case 'FETCH_SENDER_REJECTED':
+            return state = action.payload
+        default:
+            return state
+    }
+}

@@ -34,8 +34,14 @@ class CardListItemComponent extends React.Component<Props, State> {
         }
     }
 
+    unsubscribe: any
+
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().student) })
+        this.unsubscribe = store.subscribe(() => { return this.setState(store.getState().student) })
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe()
     }
 
     render() {

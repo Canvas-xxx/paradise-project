@@ -36,6 +36,7 @@ export default class App extends Component {
 
   onReceived(notification: any) {
     console.log("Notification received: ", notification);
+    alert('onReceived')
 
     this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
   }
@@ -45,6 +46,7 @@ export default class App extends Component {
     console.log('Data: ', openResult.notification.payload.additionalData);
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
+    alert('onOpened')
     Actions.trackingDetail({ studentId: '1', schoolId: '1' })
   }
 

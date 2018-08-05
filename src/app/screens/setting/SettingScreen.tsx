@@ -31,19 +31,46 @@ class SettingScreen extends React.Component<Props, State> {
     }
 
     logoutUser() {
-        AsyncStorage.removeItem('id')
-        store.dispatch({ type: 'FETCH_SENDER', payload: { username: this.state.USER_ID, senderId: '' } })
-        Actions.auth()
+        AsyncStorage.getItem('user').then( item => {
+            const obj: any = JSON.parse(item)
+            this.deleteSender(obj['senderId'], function(response: any) {
+                if (response.status === 200) {
+                    AsyncStorage.removeItem('id')
+                    AsyncStorage.removeItem('user')
+                    Actions.auth()
+                } else {
+                    alert('Fail')
+                }
+            })
+        }).catch( error => {
+            console.log(error)
+        })
+    }
+
+    deleteSender(id: string, callback: any) {
+        fetch('http://203.121.143.61:8099/deleteSenderID', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                senderId: id
+            }
+        }).then((response) => {
+            callback(response)
+        }).catch((error) => {
+            callback(error)
+        })
     }
 
     changePassword() {
-        fetch('http://203.121.143.61:8099/updateUser', {
+        AsyncStorage.getItem('user').then( item => {
+            const obj: any = JSON.parse(item)
+            fetch('http://203.121.143.61:8099/updateUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: this.state.USER_ID,
+                username: obj['username'],
                 password: new Buffer(this.state.password).toString('base64') 
             })
         }).then((response) => {
@@ -52,6 +79,7 @@ class SettingScreen extends React.Component<Props, State> {
         }).catch((error) => {
             console.log(error)
             alert('Error')
+        })
         })
     }
 

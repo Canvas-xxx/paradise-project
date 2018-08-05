@@ -54,13 +54,21 @@ export const fetchSenderEpic: Epic<FluxStandardAction> = action$ =>
             // ajax.post(`http://localhost:8099/updateSenderID`,{
             ajax.post(`http://203.121.143.61:8099/updateSenderID`,{
                 username: payload.payload.username,
-                senderId: payload.payload.senderId
+                senderId: payload.payload.senderId,
+                parentId: payload.payload.parentId,
+                schoolId: payload.payload.schoolId
             })
             .pipe(
                 map( response => 
-                    fetchSenderFulfilled(response.response)
+                    // fetchSenderFulfilled(response.response)
+                    fetchSenderFulfilled({
+                        username: payload.payload.username,
+                        senderId: payload.payload.senderId,
+                        parentId: payload.payload.parentId,
+                        schoolId: payload.payload.schoolId
+                    })
                 ),
-                catchError( (error) => of(fetchParentRejected({
+                catchError( (error) => of(fetchUserRejected({
                     status: error.status,
                     message: error.response.message
                 })))
