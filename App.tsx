@@ -20,6 +20,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    OneSignal.configure()
+
     this.onReceived = this.onReceived.bind(this);
     this.onOpened = this.onOpened.bind(this);
     this.onIds = this.onIds.bind(this);
@@ -27,7 +29,6 @@ export default class App extends Component {
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
     OneSignal.addEventListener('ids', this.onIds);
-    OneSignal.configure()
   }
 
   componentWillUnmount() {
@@ -36,7 +37,6 @@ export default class App extends Component {
 
   onReceived(notification: any) {
     console.log("Notification received: ", notification);
-    alert('onReceived')
 
     this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
   }
@@ -46,13 +46,14 @@ export default class App extends Component {
     console.log('Data: ', openResult.notification.payload.additionalData);
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
-    alert('onOpened')
-    Actions.trackingDetail({ studentId: '1', schoolId: '1' })
+    const additionalData: any = openResult.notification.payload.additionalData
+    setTimeout( function() {
+      Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
+    }, 1000)
   }
 
   onIds(device: any) {
     store.dispatch({ type: 'SET_SENDER_ID', payload: device.userId })
-    // console.log('Device info: ', device);
   }
 
   render() {

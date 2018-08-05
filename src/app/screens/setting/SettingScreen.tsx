@@ -4,7 +4,6 @@ import { Actions } from 'react-native-router-flux'
 import { Buffer } from 'buffer'
 import ButtonComponent from '../../components/login/ButtonComponent'
 import InputComponent from '../../components/login/InputComponent'
-import store from '../../store'
 
 export interface Props {
 
@@ -26,8 +25,12 @@ class SettingScreen extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        store.subscribe(() => { return this.setState(store.getState().user) })
-        store.dispatch({ type: '' })
+        AsyncStorage.getItem('id').then( item => {
+            const userObj: any = JSON.parse(item)
+            this.setState({
+                USER_ID: userObj['username']
+            })
+        })
     }
 
     logoutUser() {
