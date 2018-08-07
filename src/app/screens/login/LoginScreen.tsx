@@ -39,13 +39,17 @@ class LoginScreen extends React.Component<Props, State> {
     }
 
     public setUser() {
-        store.dispatch({ 
-            type: 'FETCH_USER',
-            payload: {
-                username: this.state.username,
-                password: new Buffer(this.state.password).toString('base64')
-            }
-        })
+        try {
+            store.dispatch({ 
+                type: 'FETCH_USER',
+                payload: {
+                    username: this.state.username,
+                    password: new Buffer(this.state.password).toString('base64')
+                }
+            })
+        } catch(e) {
+            alert('Invalid username or password.')
+        }
     }
 
     componentWillMount() {
