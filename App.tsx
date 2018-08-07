@@ -47,9 +47,11 @@ export default class App extends Component {
     console.log('isActive: ', openResult.notification.isAppInFocus);
     console.log('openResult: ', openResult);
     const additionalData: any = openResult.notification.payload.additionalData
-    setTimeout( function() {
-      Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
-    }, 1000)
+    if (additionalData) {
+      setTimeout( function() {
+        Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
+      }, 1000)
+    }
   }
 
   onIds(device: any) {

@@ -3,11 +3,12 @@ import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import store from '../../store'
 
 export interface Props {
-
+    studentName: string
 }
 
 interface State {
-    stateList: any
+    stateList: any,
+    studentName: string
 }
 
 class DetailBoxComponent extends React.Component<Props, State> {
@@ -15,7 +16,8 @@ class DetailBoxComponent extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            stateList: []
+            stateList: [],
+            studentName: props.studentName
         }
     }
 
@@ -40,6 +42,9 @@ class DetailBoxComponent extends React.Component<Props, State> {
                 stateList: this.objectList
             })
         }
+        this.setState({
+            studentName: this.props.studentName
+        })
     }
 
     componentWillUnmount() {
@@ -62,12 +67,12 @@ class DetailBoxComponent extends React.Component<Props, State> {
 
     renderName() {
         try {
-            if (this.state.stateList[0].STU_NAME_TH !== undefined) {
+            if (this.state.studentName !== undefined && this.state.studentName !== '') {
                 return (
                     <View style={styles.container}>
                         <View style={styles.bodyContain}>
                             <Text style={styles.textTitle}>Name: </Text>
-                            <Text style={styles.textContain}>{this.state.stateList[0].STU_NAME_TH}</Text>
+                            <Text style={styles.textContain}>{this.state.studentName}</Text>
                         </View>
                     </View>
                 )

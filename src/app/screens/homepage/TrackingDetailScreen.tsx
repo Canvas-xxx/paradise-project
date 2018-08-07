@@ -10,7 +10,8 @@ export interface Props {
 
 interface State {
     STU_SEQ_ID: string,
-    SCH_SEQ_ID: string
+    SCH_SEQ_ID: string,
+    STU_NAME_TH: string
 }
 
 class TrackingDetailScreen extends React.Component<Props, State> {
@@ -19,14 +20,16 @@ class TrackingDetailScreen extends React.Component<Props, State> {
 
         this.state = {
             STU_SEQ_ID: props.studentId,
-            SCH_SEQ_ID: props.schoolId
+            SCH_SEQ_ID: props.schoolId,
+            STU_NAME_TH: ''
         }
     }
 
     unsubscribe: any
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => { return this.setState(store.getState().stateList) })
+        this.unsubscribe = store.subscribe(() => { this.setState(store.getState().stateList), this.setState({ STU_NAME_TH: store.getState().student.STU_NAME_TH }) })
+        // store.dispatch({ type: 'FETCH_STUDENT', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID } })
         store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID, SCH_SEQ_ID: this.state.SCH_SEQ_ID } })
     }
 
@@ -39,7 +42,7 @@ class TrackingDetailScreen extends React.Component<Props, State> {
             <View style={styles.container}>
                 <ScrollView style={styles.scrollContain}>
                     <View style={styles.bodyScroll}>
-                        <DetailBoxComponent />
+                        <DetailBoxComponent studentName={this.state.STU_NAME_TH} />
                     </View>
                 </ScrollView>
             </View>
