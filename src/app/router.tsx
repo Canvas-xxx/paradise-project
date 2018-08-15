@@ -7,6 +7,8 @@ import ForgotScreen from './screens/login/ForgotScreen'
 import HomeScreen from './screens/homepage/HomeScreen'
 import TrackingScreen from './screens/homepage/TrackingScreen'
 import TrackingDetailScreen from  './screens/homepage/TrackingDetailScreen'
+import MapTrackingScreen from './screens/homepage/MapTrackingScreen'
+import AnnounceScreen from './screens/announcement/AnnounceScreen'
 import SettingScreen from './screens/setting/SettingScreen'
 
 export interface Props {
@@ -78,6 +80,25 @@ class RouterComponent extends React.Component<Props, State> {
                                         titleStyle={{ color: 'white', fontSize: 20 }}
                                         navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
                                     </Scene>
+                                    <Scene key='mapTracking'
+                                        component={MapTrackingScreen}
+                                        hideNavBar={false}
+                                        title='Map'
+                                        titleStyle={{ color: 'white', fontSize: 20 }}
+                                        navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
+                                    </Scene>
+                                </Scene>
+                                <Scene key='announce'
+                                    component={AnnounceScreen}
+                                    hideNavBar={false}
+                                    icon={({focused}) => (
+                                        <Icon name='announcement'
+                                        size={30}
+                                        color={focused ? '#33502e' : 'lightgrey'} />
+                                    )}
+                                    title='News Feed'
+                                    titleStyle={{ color: 'white', fontSize: 20 }}
+                                    navigationBarStyle={{ height: 40,backgroundColor: '#e6eaab' }}>
                                 </Scene>
                                 <Scene key='setting'
                                     component={SettingScreen}
@@ -131,6 +152,25 @@ class RouterComponent extends React.Component<Props, State> {
                                         titleStyle={{ color: 'white', fontSize: 20 }}
                                         navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
                                     </Scene>
+                                    <Scene key='mapTracking'
+                                        component={MapTrackingScreen}
+                                        hideNavBar={false}
+                                        title='Map'
+                                        titleStyle={{ color: 'white', fontSize: 20 }}
+                                        navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
+                                    </Scene>
+                                </Scene>
+                                <Scene key='announce'
+                                    component={AnnounceScreen}
+                                    hideNavBar={false}
+                                    icon={({focused}) => (
+                                        <Icon name='announcement'
+                                        size={30}
+                                        color={focused ? '#33502e' : 'lightgrey'} />
+                                    )}
+                                    title='News Feed'
+                                    titleStyle={{ color: 'white', fontSize: 20 }}
+                                    navigationBarStyle={{ height: 40,backgroundColor: '#e6eaab' }}>
                                 </Scene>
                                 <Scene key='setting'
                                     component={SettingScreen}

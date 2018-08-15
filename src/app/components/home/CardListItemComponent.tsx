@@ -16,7 +16,8 @@ interface State {
     DRV_NAME: string,
     DRV_PHONE: string,
     STU_SEQ_ID: string,
-    SCH_SEQ_ID: string
+    SCH_SEQ_ID: string,
+    BUS_STATUS: string
 }
 
 class CardListItemComponent extends React.Component<Props, State> {
@@ -30,7 +31,8 @@ class CardListItemComponent extends React.Component<Props, State> {
             DRV_NAME: '',
             DRV_PHONE: '',
             STU_SEQ_ID: '',
-            SCH_SEQ_ID: ''
+            SCH_SEQ_ID: '',
+            BUS_STATUS: ''
         }
     }
 
@@ -42,6 +44,17 @@ class CardListItemComponent extends React.Component<Props, State> {
 
     componentWillUnmount() {
         this.unsubscribe()
+    }
+    
+    goToMap = () => {
+        if(this.state.BUS_STATUS) {
+            // alert('go')
+            Actions.mapTracking()
+        } 
+        else {
+            // alert('fail')
+            Actions.mapTracking()
+        }
     }
 
     render() {
@@ -81,7 +94,12 @@ class CardListItemComponent extends React.Component<Props, State> {
                         </Text>
                     </View>
                     <View style={styles.bodyContain}>
+                        <Text style={styles.titleText}>Bus Statue: </Text>
+                        <Text style={styles.detailText}>{this.state.BUS_STATUS}</Text>
+                    </View>
+                    <View style={styles.bodyContain}>
                         <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
+                        <Button title='Map' onPress={() => this.goToMap()} />
                     </View>
                 </View>
             </View>

@@ -39,17 +39,13 @@ class LoginScreen extends React.Component<Props, State> {
     }
 
     public setUser() {
-        try {
-            store.dispatch({ 
-                type: 'FETCH_USER',
-                payload: {
-                    username: this.state.username,
-                    password: new Buffer(this.state.password).toString('base64')
-                }
-            })
-        } catch(e) {
-            alert('Invalid username or password.')
-        }
+        store.dispatch({ 
+            type: 'FETCH_USER',
+            payload: {
+                username: this.state.username,
+                password: new Buffer(this.state.password).toString('base64')
+            }
+        })
     }
 
     componentWillMount() {
@@ -58,33 +54,37 @@ class LoginScreen extends React.Component<Props, State> {
     }
 
     componentDidUpdate() {
-        if(this.state.USER_ID.length > 0) {
-            AsyncStorage.setItem('id', JSON.stringify({
-                id: this.state.USER_PAR_SEQ_ID,
-                username: this.state.USER_ID,
-                password: this.state.USER_PASS
-            }))
-            AsyncStorage.setItem('user', JSON.stringify({
-                username: this.state.USER_ID,
-                senderId: this.state.senderId,
-                schoolId: this.state.USER_SCH_SEQ_ID,
-                parentId: this.state.USER_PAR_SEQ_ID
-            }))
-            if(!this.state.updateSender) {
-                store.dispatch({
-                    type: 'FETCH_SENDER',
-                    payload: { 
-                        username: this.state.USER_ID,
-                        senderId: this.state.senderId,
-                        schoolId: this.state.USER_SCH_SEQ_ID,
-                        parentId: this.state.USER_PAR_SEQ_ID
-                    } 
-                })
-                this.setState({
-                    updateSender: true
-                })
+        try {
+            if(this.state.USER_ID) {
+                AsyncStorage.setItem('id', JSON.stringify({
+                    id: this.state.USER_PAR_SEQ_ID,
+                    username: this.state.USER_ID,
+                    password: this.state.USER_PASS
+                }))
+                AsyncStorage.setItem('user', JSON.stringify({
+                    username: this.state.USER_ID,
+                    senderId: this.state.senderId,
+                    schoolId: this.state.USER_SCH_SEQ_ID,
+                    parentId: this.state.USER_PAR_SEQ_ID
+                }))
+                if(!this.state.updateSender) {
+                    store.dispatch({
+                        type: 'FETCH_SENDER',
+                        payload: { 
+                            username: this.state.USER_ID,
+                            senderId: this.state.senderId,
+                            schoolId: this.state.USER_SCH_SEQ_ID,
+                            parentId: this.state.USER_PAR_SEQ_ID
+                        } 
+                    })
+                    this.setState({
+                        updateSender: true
+                    })
+                }
+                Actions.home()
             }
-            Actions.home()
+        } catch(e) {
+            // alert('Invalid username or password.')
         }
     }
 
