@@ -36,20 +36,28 @@ export default class App extends Component {
   }
 
   onReceived(notification: any) {
-    console.log("Notification received: ", notification);
+    // console.log("Notification received: ", notification);
 
     this.setState({jsonDebugText : "RECEIVED: \n" + JSON.stringify(notification, null, 2)})
   }
 
   onOpened(openResult: any) {
-    console.log('Message: ', openResult.notification.payload.body);
-    console.log('Data: ', openResult.notification.payload.additionalData);
-    console.log('isActive: ', openResult.notification.isAppInFocus);
-    console.log('openResult: ', openResult);
+    // console.log('Message: ', openResult.notification.payload.body);
+    // console.log('Data: ', openResult.notification.payload.additionalData);
+    // console.log('isActive: ', openResult.notification.isAppInFocus);
+    // console.log('openResult: ', openResult);
     const additionalData: any = openResult.notification.payload.additionalData
     if (additionalData) {
+
+      if(additionalData.hasOwnProperty('studentId')) {
+        setTimeout( function() {
+          Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
+        }, 1000)
+        return
+      }
+
       setTimeout( function() {
-        Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
+        Actions.announce()
       }, 1000)
     }
   }

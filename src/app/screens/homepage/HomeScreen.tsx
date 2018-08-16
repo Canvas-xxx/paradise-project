@@ -35,6 +35,8 @@ class HomeScreen extends React.Component<Props, State> {
                     store.dispatch({ type: 'FETCH_SENDER_FULFILLED', payload: senderObj })
                 })
             }
+        }).catch( (error) => {
+            alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง')
         })
     }
 

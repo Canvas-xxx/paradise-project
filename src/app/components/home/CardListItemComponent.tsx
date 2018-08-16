@@ -57,6 +57,14 @@ class CardListItemComponent extends React.Component<Props, State> {
         }
     }
 
+    converStatus = (status: string) => {
+        if(status) {
+            return status
+        }
+
+        return 'No data.'
+    }
+
     render() {
         return (
             <View style={styles.listContain}>
@@ -70,7 +78,6 @@ class CardListItemComponent extends React.Component<Props, State> {
                         <Text style={styles.detailText}>{this.state.TECH_NAME}</Text>
                     </View>
                     <View style={styles.bodyContain}>
-                        {/* <Text style={styles.titleText}>Teacher Tel: </Text> */}
                         <View style={{flex: 1, alignItems: 'flex-start'}}>
                             <Icon iconStyle={styles.iconStyle} name="contact-phone" />
                         </View>
@@ -84,7 +91,6 @@ class CardListItemComponent extends React.Component<Props, State> {
                         <Text style={styles.detailText}>{this.state.DRV_NAME}</Text>
                     </View>
                     <View style={styles.bodyContain}>
-                        {/* <Text style={styles.titleText}>Driver Tel: </Text> */}
                         <View style={{flex: 1, alignItems: 'flex-start'}}>
                             <Icon iconStyle={styles.iconStyle} name="contact-phone" />
                         </View>
@@ -95,7 +101,7 @@ class CardListItemComponent extends React.Component<Props, State> {
                     </View>
                     <View style={styles.bodyContain}>
                         <Text style={styles.titleText}>Bus Statue: </Text>
-                        <Text style={styles.detailText}>{this.state.BUS_STATUS}</Text>
+                        <Text style={styles.detailText}>{this.converStatus(this.state.BUS_STATUS)}</Text>
                     </View>
                     <View style={styles.bodyContain}>
                         <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
