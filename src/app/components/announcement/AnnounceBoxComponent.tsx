@@ -21,15 +21,21 @@ class AnnounceBoxComponent extends React.Component<Props, State> {
         this.state = {
             subject: props.subject,
             detail: props.detail,
-            date: new Date(props.date).toString()
+            date: props.date
         }
+    }
+
+    convertDate = (date: string) => {
+        const newDate = new Date(date)
+        const month = newDate.getMonth() + 1
+        return newDate.getFullYear() + '/' + (month > 9 ? month : '0' + month) + '/' + newDate.getDate()
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <Text style={styles.subText}>{this.state.subject}</Text>
-                <Text style={styles.dateText}>{this.state.date}</Text>
+                <Text style={styles.dateText}>{this.convertDate(this.state.date)}</Text>
                 <Text style={styles.detailText}>{this.state.detail}</Text>
             </View>
         )

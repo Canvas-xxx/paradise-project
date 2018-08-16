@@ -58,11 +58,15 @@ class CardListItemComponent extends React.Component<Props, State> {
     }
 
     converStatus = (status: string) => {
-        if(status) {
-            return status
+        if(status === 'PRCS') {
+            return 'On route'
         }
 
-        return 'No data.'
+        if(status === 'END') {
+            return 'Arrived at'
+        }
+
+        return 'Parked'
     }
 
     render() {

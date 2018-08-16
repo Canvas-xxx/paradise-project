@@ -77,10 +77,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',
         width: '100%',
-        paddingLeft: '2%',
-        paddingRight: '2%',
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 15,
+        paddingBottom: 15
     }
 })
 
