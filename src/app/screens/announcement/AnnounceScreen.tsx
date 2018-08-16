@@ -25,9 +25,13 @@ class AnnounceScreen extends React.Component<Props, State> {
     unsubscribe1: any
     unsubscribe2: any
 
+    componentWillMount() {
+        this.unsubscribe1 = store.subscribe(() => { this.setState({ PAR_SCH_SEQ_ID: 1 }) })
+        this.unsubscribe2 = store.subscribe(() => { this.setState({ announceList: store.getState().announce }) })
+        store.dispatch({ type: '' })
+    }
+
     componentDidMount() {
-        this.unsubscribe1 = store.subscribe(() => { return this.setState(store.getState().user) })
-        this.unsubscribe2 = store.subscribe(() => { return this.setState({ announceList: store.getState().announce }) })
         store.dispatch({ type: 'FETCH_ANNOUNCE', payload: { SCH_SEQ_ID: this.state.PAR_SCH_SEQ_ID } })
     }
 
@@ -37,17 +41,19 @@ class AnnounceScreen extends React.Component<Props, State> {
     }
 
     renderAnnounceBox = () => {
-        if(this.state.announceList) {
+        if(this.state.announceList.length === 0) {
             return (
                 <AnnounceBoxComponent subject='No Subject' detail='no information' date=''></AnnounceBoxComponent>
             )
         }
 
-        this.state.announceList.map( (item: any, index: number) => {
-            return (
-                <AnnounceBoxComponent key={index} subject={item.MSG_SUBJECT} detail={item.MSG_BODY} date={item.MSG_DATE}></AnnounceBoxComponent>
-            )
-        })
+        return (
+            this.state.announceList.map( (item: any, index: number) => {
+                return (
+                    <AnnounceBoxComponent key={index} subject={item.MSG_SUBJECT} detail={item.MSG_BODY} date={item.MSG_DATE}></AnnounceBoxComponent>
+                )
+            })
+        )
     }
 
     render() {
