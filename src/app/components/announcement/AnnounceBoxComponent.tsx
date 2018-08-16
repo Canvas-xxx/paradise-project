@@ -21,7 +21,7 @@ class AnnounceBoxComponent extends React.Component<Props, State> {
         this.state = {
             subject: props.subject,
             detail: props.detail,
-            date: props.date
+            date: new Date(props.date).toString()
         }
     }
 
