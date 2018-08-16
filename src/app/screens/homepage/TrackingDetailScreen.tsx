@@ -4,14 +4,16 @@ import DetailBoxComponent from '../../components/home/DetailBoxComponent'
 import store from '../../store'
 
 export interface Props {
-    studentId: string,
-    schoolId: string
+    studentId: any,
+    schoolId: any,
+    techId: any
 }
 
 interface State {
-    STU_SEQ_ID: string,
-    SCH_SEQ_ID: string,
-    STU_NAME_TH: string
+    STU_SEQ_ID: any,
+    SCH_SEQ_ID: any,
+    STU_NAME_TH: string,
+    TECH_SEQ_ID: any
 }
 
 class TrackingDetailScreen extends React.Component<Props, State> {
@@ -21,7 +23,8 @@ class TrackingDetailScreen extends React.Component<Props, State> {
         this.state = {
             STU_SEQ_ID: props.studentId,
             SCH_SEQ_ID: props.schoolId,
-            STU_NAME_TH: ''
+            STU_NAME_TH: '',
+            TECH_SEQ_ID: props.techId
         }
     }
 
@@ -29,8 +32,7 @@ class TrackingDetailScreen extends React.Component<Props, State> {
 
     componentDidMount() {
         this.unsubscribe = store.subscribe(() => { this.setState(store.getState().stateList), this.setState({ STU_NAME_TH: store.getState().student.STU_NAME_TH }) })
-        // store.dispatch({ type: 'FETCH_STUDENT', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID } })
-        // store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID, SCH_SEQ_ID: this.state.SCH_SEQ_ID } })
+        store.dispatch({ type: 'FETCH_STATE_LIST', payload: { STU_SEQ_ID: this.state.STU_SEQ_ID, SCH_SEQ_ID: this.state.SCH_SEQ_ID, TECH_SEQ_ID: this.state.TECH_SEQ_ID } })
     }
 
     componentWillUnmount() {

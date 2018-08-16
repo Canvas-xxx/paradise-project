@@ -26,7 +26,8 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
         ajax.get(`http://203.121.143.61:8099/stateDetail`, {
             'Content-Type': 'application/json',
             'studentId': payload.payload.STU_SEQ_ID,
-            'schoolId': payload.payload.SCH_SEQ_ID
+            'schoolId': payload.payload.SCH_SEQ_ID,
+            'techId': payload.payload.TECH_SEQ_ID
         })
         .pipe(
             map( response =>

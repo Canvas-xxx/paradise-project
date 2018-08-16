@@ -22,8 +22,9 @@ class DetailBoxComponent extends React.Component<Props, State> {
     }
 
     objectList: Object = [{
+        NAME: 'No data.',
         Status: 'No data.',
-        STX_CREATE_DATE: 'No data.'
+        DATE: 'No data.'
     }]
 
     unsubscribe: any
@@ -45,6 +46,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
         this.setState({
             studentName: this.props.studentName
         })
+        console.log(this.state)
     }
 
     componentWillUnmount() {
@@ -104,12 +106,16 @@ class DetailBoxComponent extends React.Component<Props, State> {
                 return (
                     <View key={index} style={styles.container}>
                         <View style={styles.bodyContain}>
+                            <Text style={styles.textTitle}>Name: </Text>
+                            <Text style={styles.textContain}>{item.NAME}</Text>
+                        </View>
+                        <View style={styles.bodyContain}>
                             <Text style={styles.textTitle}>Status: </Text>
                             <Text style={styles.textContain}>{item.Status}</Text>
                         </View>
                         <View style={styles.bodyContain}>
                             <Text style={styles.textTitle}>Date: </Text>
-                            <Text style={styles.textContain}>{this.renderDateFormat(item.STX_CREATE_DATE)}</Text>
+                            <Text style={styles.textContain}>{this.renderDateFormat(item.DATE)}</Text>
                         </View>
                     </View>
                 )
@@ -120,7 +126,7 @@ class DetailBoxComponent extends React.Component<Props, State> {
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column'}}>
-                {this.renderName()}
+                {/* {this.renderName()} */}
                 {this.renderList()}
             </View>
         )

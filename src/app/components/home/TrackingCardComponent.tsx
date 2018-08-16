@@ -44,7 +44,7 @@ class TrackingCardComponent extends React.Component<Props, State> {
                 </View>
                 <View style={styles.body}>
                     <View style={styles.leftSide}>
-                        <Image style={styles.imageStyle} source={{uri: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'}} />
+                        <Image style={styles.imageStyle} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Default-welcomer.png/643px-Default-welcomer.png'}} />
                     </View>
                     <View style={styles.rightSide}>
                         <View style={styles.textContain}>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageStyle: {
-        height: '70%',
+        height: '90%',
         width: '80%',
         resizeMode: 'cover',
         borderWidth: 2,

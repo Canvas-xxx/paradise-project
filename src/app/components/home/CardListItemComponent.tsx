@@ -15,9 +15,10 @@ interface State {
     TECH_PHONE: string,
     DRV_NAME: string,
     DRV_PHONE: string,
-    STU_SEQ_ID: string,
-    SCH_SEQ_ID: string,
-    BUS_STATUS: string
+    STU_SEQ_ID: any,
+    SCH_SEQ_ID: any,
+    BUS_STATUS: string,
+    TECH_SEQ_ID: any
 }
 
 class CardListItemComponent extends React.Component<Props, State> {
@@ -32,7 +33,8 @@ class CardListItemComponent extends React.Component<Props, State> {
             DRV_PHONE: '',
             STU_SEQ_ID: '',
             SCH_SEQ_ID: '',
-            BUS_STATUS: ''
+            BUS_STATUS: '',
+            TECH_SEQ_ID: ''
         }
     }
 
@@ -108,7 +110,13 @@ class CardListItemComponent extends React.Component<Props, State> {
                         <Text style={styles.detailText}>{this.converStatus(this.state.BUS_STATUS)}</Text>
                     </View>
                     <View style={styles.bodyContain}>
-                        <Button title='Check Transaction' onPress={() => {Actions.trackingDetail({ studentId: this.state.STU_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })}} />
+                        <Button title='Check Transaction' onPress={() => {
+                            Actions.trackingDetail({
+                                studentId: this.state.STU_SEQ_ID,
+                                schoolId: this.state.SCH_SEQ_ID,
+                                techId: this.state.TECH_SEQ_ID
+                            })
+                        }} />
                         <Button title='Map' onPress={() => this.goToMap()} />
                     </View>
                 </View>
