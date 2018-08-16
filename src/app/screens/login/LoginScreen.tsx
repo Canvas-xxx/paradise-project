@@ -50,7 +50,7 @@ class LoginScreen extends React.Component<Props, State> {
 
     componentWillMount() {
         store.subscribe(() => { return this.setState(store.getState().user) })
-        store.subscribe(() => { return this.setState({ senderId: store.getState().senderId }) })
+        store.subscribe(() => { this.setState({ senderId: store.getState().senderId }) })
     }
 
     componentDidUpdate() {
