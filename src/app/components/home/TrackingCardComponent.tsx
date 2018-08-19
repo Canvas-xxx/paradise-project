@@ -99,7 +99,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderTopLeftRadius: 15,
-        borderTopRightRadius: 15
+        borderTopRightRadius: 15,
+        paddingTop: 10,
+        paddingBottom: 10
     },
     title: {
         color: 'white',

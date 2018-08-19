@@ -51,14 +51,16 @@ export default class App extends Component {
 
       if(additionalData.hasOwnProperty('studentId')) {
         setTimeout( function() {
-          Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'] })
+          Actions.trackingDetail({ studentId: additionalData['studentId'], schoolId: additionalData['schoolId'], techId: additionalData['techId'] })
         }, 1000)
         return
       }
 
-      setTimeout( function() {
-        Actions.announce()
-      }, 1000)
+      if(additionalData.hasOwnProperty('page')) {
+        setTimeout( function() {
+          Actions.announce()
+        }, 1000)
+      }
     }
   }
 
