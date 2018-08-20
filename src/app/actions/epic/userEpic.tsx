@@ -16,7 +16,7 @@ const FETCH_USER_REJECTED = 'FETCH_USER_REJECTED'
 
 const FETCH_SENDER = 'FETCH_SENDER'
 const FETCH_SENDER_FULFILLED = 'FETCH_SENDER_FULFILLED'
-const FETCH_PARENT_REJECTED = 'FETCH_PARENT_REJECTED'
+const FETCH_SENDER_REJECTED = 'FETCH_SENDER_REJECTED'
 
 export const fetchUser = () => ({ type: FETCH_USER })
 export const fetchUserFulfilled = (payload: Object) => ({ type: FETCH_USER_FULFILLED, payload: payload })
@@ -24,14 +24,14 @@ export const fetchUserRejected = (error: any) => ({ type: FETCH_USER_REJECTED, p
 
 export const fetchSender = () => ({ type: FETCH_SENDER })
 export const fetchSenderFulfilled = (payload: Object) => ({ type: FETCH_SENDER_FULFILLED, payload: payload })
-export const fetchParentRejected = (error: any) => ({ type: FETCH_PARENT_REJECTED, payload: error, error: true })
+export const fetchSenderRejected = (error: any) => ({ type: FETCH_SENDER_REJECTED, payload: error, error: true })
 
-export const fetchUserEpic: Epic<FluxStandardAction> = action$ => 
+export const fetchUserEpic: Epic<FluxStandardAction> = (action$) => 
     action$.pipe(
         ofType(FETCH_USER),
         mergeMap((payload: any) =>
-            // ajax.post(`http://localhost:8099/authenticationLogin`,{
-            ajax.post(`http://203.121.143.61:8099/authenticationLogin`,{
+            ajax.post(`http://localhost:8099/authenticationLogin`,{
+            // ajax.post(`http://203.121.143.61:8099/authenticationLogin`,{
                 username: payload.payload.username,
                 password: payload.payload.password
             })
@@ -68,7 +68,7 @@ export const fetchSenderEpic: Epic<FluxStandardAction> = action$ =>
                         schoolId: payload.payload.schoolId
                     })
                 ),
-                catchError( (error) => of(fetchUserRejected({
+                catchError( (error) => of(fetchSenderRejected({
                     status: error.status,
                     message: error.response.message
                 })))
