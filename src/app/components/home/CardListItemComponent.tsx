@@ -18,7 +18,8 @@ interface State {
     STU_SEQ_ID: any,
     SCH_SEQ_ID: any,
     BUS_STATUS: string,
-    TECH_SEQ_ID: any
+    TECH_SEQ_ID: any,
+    BUS_SEQ_ID: number
 }
 
 class CardListItemComponent extends React.Component<Props, State> {
@@ -34,7 +35,8 @@ class CardListItemComponent extends React.Component<Props, State> {
             STU_SEQ_ID: '',
             SCH_SEQ_ID: '',
             BUS_STATUS: '',
-            TECH_SEQ_ID: ''
+            TECH_SEQ_ID: '',
+            BUS_SEQ_ID: 0
         }
     }
 
@@ -49,14 +51,11 @@ class CardListItemComponent extends React.Component<Props, State> {
     }
     
     goToMap = () => {
-        if(this.state.BUS_STATUS) {
-            // alert('go')
-            Actions.mapTracking()
-        } 
-        else {
-            // alert('fail')
-            Actions.mapTracking()
+        if(this.state.BUS_STATUS === 'PRCS') {
+            Actions.mapTracking({ busId: this.state.BUS_SEQ_ID, schoolId: this.state.SCH_SEQ_ID })
         }
+
+        // Actions.mapTracking()
     }
 
     converStatus = (status: string) => {

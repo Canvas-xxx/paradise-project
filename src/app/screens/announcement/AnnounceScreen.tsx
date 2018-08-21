@@ -26,8 +26,8 @@ class AnnounceScreen extends React.Component<Props, State> {
     unsubscribe2: any
 
     componentWillMount() {
-        this.unsubscribe1 = store.subscribe(() => { this.setState({ PAR_SCH_SEQ_ID: 1 }) })
-        this.unsubscribe2 = store.subscribe(() => { this.setState({ announceList: store.getState().announce }) })
+        this.unsubscribe1 = store.subscribe(() => { return this.setState({ PAR_SCH_SEQ_ID: store.getState().parent.PAR_SCH_SEQ_ID }) })
+        this.unsubscribe2 = store.subscribe(() => { return this.setState({ announceList: store.getState().announce }) })
         store.dispatch({ type: '' })
     }
 

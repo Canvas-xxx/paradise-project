@@ -1,48 +1,48 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import store from '../../store'
 
-import MapView, { Marker } from 'react-native-maps'
+import MapViewComponent from '../../components/map/MapViewComponent'
 
 export interface Props {
-
+    busId: number,
+    schoolId: number
 }
 
 interface State {
-
+    
 }
 
 class MapTrackingScreen extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
-        
-        this.state = {
-
-        }
     }
 
-    componentDidMount() {
+    interval: any
 
+    componentDidMount() {
+        store.dispatch({ type: 'FETCH_BUS_LOCATION', payload: {
+            busId: this.props.busId,
+            schoolId: this.props.schoolId
+        } })
+
+        const that = this
+        this.interval = setInterval( function() {
+            store.dispatch({ type: 'FETCH_BUS_LOCATION', payload: {
+                busId: that.props.busId,
+                schoolId: that.props.schoolId
+            } })
+        }, 60000 * 5)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
 
     render() {
         return (
-            // <View style={styles.container}>
-            //     <Text>MapTrackingScreen</Text>
-            // </View>
             <View style ={styles.container}>
-                <MapView
-                    style={styles.map}
-                    region={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.001,
-                    longitudeDelta: 0.0001,
-                    }}
-                >
-                    <Marker coordinate={{ latitude: 37.78825, longitude: -122.4324}}>
-                    </Marker>
-                </MapView>
+                <MapViewComponent />
             </View>
         )
     }
@@ -50,10 +50,6 @@ class MapTrackingScreen extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'center'
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -61,13 +57,6 @@ const styles = StyleSheet.create({
         right: 0,
         justifyContent: 'flex-end',
         alignItems: 'center'
-    },
-    map: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
     }
 })
 

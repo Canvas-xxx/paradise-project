@@ -16,9 +16,9 @@ const FETCH_ANNOUNCE_REJECTED = 'FETCH_ANNOUNCE_REJECTED'
 
 export const fetchAnnounce = () => ({ type: FETCH_ANNOUNCE })
 export const fetchAnnounceFulfilled = (payload: Object) => ({ type: FETCH_ANNOUNCE_FULFILLED, payload: payload })
-export const fetchAnnounceRejected = (error: any) => ({type: FETCH_ANNOUNCE_REJECTED, payload: error })
+export const fetchAnnounceRejected = (error: any) => ({type: FETCH_ANNOUNCE_REJECTED, payload: error, error: true })
 
-export const fetchAnnounceEpic: Epic<FluxStandardAction> =action$ =>
+export const fetchAnnounceEpic: Epic<FluxStandardAction> = action$ =>
   action$.pipe(
       ofType(FETCH_ANNOUNCE),
       mergeMap((payload: any) =>
