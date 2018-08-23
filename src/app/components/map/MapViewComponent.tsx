@@ -25,7 +25,7 @@ class MapViewComponent extends React.Component<Props, State> {
     unsubscribe: any
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => { return this.setState({ latitude: parseInt(store.getState().bus.POSB_LATITUDE), longtitude: parseInt(store.getState().bus.POSB_LONGITUDE) }) })
+        this.unsubscribe = store.subscribe(() => { return this.setState({ latitude: parseFloat(store.getState().bus.POSB_LATITUDE), longtitude: parseFloat(store.getState().bus.POSB_LONGITUDE) }) })
     }
 
     componentWillUnmount() {
@@ -45,7 +45,7 @@ class MapViewComponent extends React.Component<Props, State> {
                     }}>
                     <Marker coordinate={{ latitude: 0, longitude: 0 }}>
                         <View>
-                            <Image source={require('../../../assets/icon/logo/paradise-logo.png')} style={{ width: 60, height: 60}} />
+                            <Image source={require('../../../assets/pins/pins_bus.png')} style={{ width: 60, height: 60}} />
                         </View>
                     </Marker>
                 </MapView>
@@ -61,7 +61,7 @@ class MapViewComponent extends React.Component<Props, State> {
                     longitudeDelta: 0.01,
                     }}>
                     <Marker coordinate={{ latitude: this.state.latitude, longitude: this.state.longtitude }}
-                        image={require('../../../assets/icon/logo/paradise-logo.png')}>
+                        image={require('../../../assets/pins/pins_bus.png')}>
                     </Marker>
                 </MapView>
             )
