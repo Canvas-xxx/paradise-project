@@ -39,53 +39,74 @@ class LoginScreen extends React.Component<Props, State> {
     }
 
     public setUser() {
-        store.dispatch({ 
-            type: 'FETCH_USER',
-            payload: {
+        fetch('http://203.121.143.61:8099/authenticationLogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 username: this.state.username,
                 password: new Buffer(this.state.password).toString('base64')
+            })
+        }).then((response) => response.json()
+        ).then((responseJson) => {
+            if(responseJson.hasOwnProperty('message')) {
+                store.dispatch({ type: 'FETCH_USER_REJECTED', payload: {
+                    status: 422,
+                    message: responseJson.message
+                }})
+                alert(responseJson.message)
             }
+
+            if(responseJson.hasOwnProperty('USER_ID')) {
+                store.dispatch({ type: 'FETCH_USER' })
+                store.dispatch({ type: 'FETCH_USER_FULFILLED', payload: responseJson })
+                this.storeInStorage()
+            }
+        }).catch((error) => {
+            alert('Invalid username or password.')
         })
+        // store.dispatch({ 
+        //     type: 'FETCH_USER',
+        //     payload: {
+        //         username: this.state.username,
+        //         password: new Buffer(this.state.password).toString('base64')
+        //     }
+        // })
+    }
+
+    storeInStorage = () => {
+        AsyncStorage.setItem('id', JSON.stringify({
+            id: this.state.USER_PAR_SEQ_ID,
+            username: this.state.USER_ID,
+            password: this.state.USER_PASS
+        }))
+        AsyncStorage.setItem('user', JSON.stringify({
+            username: this.state.USER_ID,
+            senderId: this.state.senderId,
+            schoolId: this.state.USER_SCH_SEQ_ID,
+            parentId: this.state.USER_PAR_SEQ_ID
+        }))
+        if(!this.state.updateSender) {
+            store.dispatch({
+                type: 'FETCH_SENDER',
+                payload: { 
+                    username: this.state.USER_ID,
+                    senderId: this.state.senderId,
+                    schoolId: this.state.USER_SCH_SEQ_ID,
+                    parentId: this.state.USER_PAR_SEQ_ID
+                } 
+            })
+            this.setState({
+                updateSender: true
+            })
+        }
+        Actions.home()
     }
 
     componentWillMount() {
         store.subscribe(() => { return this.setState(store.getState().user) })
         store.subscribe(() => { this.setState({ senderId: store.getState().senderId }) })
-    }
-
-    componentDidUpdate() {
-        try {
-            if(this.state.USER_ID) {
-                AsyncStorage.setItem('id', JSON.stringify({
-                    id: this.state.USER_PAR_SEQ_ID,
-                    username: this.state.USER_ID,
-                    password: this.state.USER_PASS
-                }))
-                AsyncStorage.setItem('user', JSON.stringify({
-                    username: this.state.USER_ID,
-                    senderId: this.state.senderId,
-                    schoolId: this.state.USER_SCH_SEQ_ID,
-                    parentId: this.state.USER_PAR_SEQ_ID
-                }))
-                if(!this.state.updateSender) {
-                    store.dispatch({
-                        type: 'FETCH_SENDER',
-                        payload: { 
-                            username: this.state.USER_ID,
-                            senderId: this.state.senderId,
-                            schoolId: this.state.USER_SCH_SEQ_ID,
-                            parentId: this.state.USER_PAR_SEQ_ID
-                        } 
-                    })
-                    this.setState({
-                        updateSender: true
-                    })
-                }
-                Actions.home()
-            }
-        } catch(e) {
-            // alert('Invalid username or password.')
-        }
     }
 
     render() {

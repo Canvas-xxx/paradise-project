@@ -7,7 +7,7 @@ import { fetchAnnounceEpic } from './epic/announceEpic'
 import { fetchBusLocationEpic } from './epic/busEpic'
 
 const rootEpics = combineEpics(
-    fetchUserEpic,
+    // fetchUserEpic,
     fetchSenderEpic,
     fetchParentEpic,
     fetchStudentEpic,
