@@ -32,7 +32,7 @@ class MapTrackingScreen extends React.Component<Props, State> {
                 busId: that.props.busId,
                 schoolId: that.props.schoolId
             } })
-        }, 60000 * 5)
+        }, 60000 * 1)
     }
 
     componentWillUnmount() {

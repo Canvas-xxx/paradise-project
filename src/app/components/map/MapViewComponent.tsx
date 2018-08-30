@@ -45,7 +45,7 @@ class MapViewComponent extends React.Component<Props, State> {
                     }}>
                     <Marker coordinate={{ latitude: 0, longitude: 0 }}>
                         <View>
-                            <Image source={require('../../../assets/pins/pins_bus.png')} style={{ width: 60, height: 60}} />
+                            <Image source={require('../../../assets/pins/pins_bus_animate.gif')} style={{ width: 40, height: 20}} />
                         </View>
                     </Marker>
                 </MapView>
@@ -61,7 +61,7 @@ class MapViewComponent extends React.Component<Props, State> {
                     longitudeDelta: 0.01,
                     }}>
                     <Marker coordinate={{ latitude: this.state.latitude, longitude: this.state.longtitude }}
-                        image={require('../../../assets/pins/pins_bus.png')}>
+                        image={require('../../../assets/pins/pins_bus_animate.gif')} style={{ width: 40, height: 20}}>
                     </Marker>
                 </MapView>
             )
