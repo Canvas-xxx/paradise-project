@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 import { Button } from 'react-native-elements'
 import store from '../../store'
 
@@ -9,6 +10,7 @@ export interface Props {
 
 interface State {
     SCH_NAME_TH: string,
+    SCH_SEQ_ID: string,
     STU_SEQ_ID: string,
     STU_NAME_TH: string,
     STU_CLASS: string
@@ -20,6 +22,7 @@ class TrackingCardComponent extends React.Component<Props, State> {
 
         this.state = {
             SCH_NAME_TH: '',
+            SCH_SEQ_ID: '',
             STU_SEQ_ID: '',
             STU_NAME_TH: '',
             STU_CLASS: ''
@@ -70,7 +73,13 @@ class TrackingCardComponent extends React.Component<Props, State> {
                         <Button title='ตารางสอบ' onPress={() => {}} />
                     </View>
                     <View style={styles.textContain}>
-                        <Button title='ผลการเรียน' onPress={() => {}} />
+                        <Button title='ผลการเรียน' onPress={() => {
+                            // Actions.scoreExam({
+                            //     studentId: this.state.STU_SEQ_ID,
+                            //     className: this.state.STU_CLASS,
+                            //     schoolId: this.state.SCH_SEQ_ID
+                            // })
+                        }} />
                     </View>
                 </View>
             </View>

@@ -7,6 +7,7 @@ import { stateReducer, stateRejectedReducer } from './process/StateReducer'
 import { stateListReducer, stateListRejectedReducer } from './process/StateListReducer'
 import { announceReducer, announceRejectedReducer } from './announce/AnnounceReducre'
 import { busReducer, busRejectedReducer } from './bus/BusReducer'
+import { scoreExamReducer, scoreExamRejectedReducer } from './scoreExam/ScoreExampleReducer'
 
 export default combineReducers({
     user: userReducer,
@@ -27,5 +28,7 @@ export default combineReducers({
     announce: announceReducer,
     announceReject: announceRejectedReducer,
     bus: busReducer,
-    busReject: busRejectedReducer
+    busReject: busRejectedReducer,
+    score: scoreExamReducer,
+    scoreReject: scoreExamRejectedReducer
 })

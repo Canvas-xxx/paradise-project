@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 import store from '../../store'
 
@@ -43,8 +43,8 @@ class MapViewComponent extends React.Component<Props, State> {
                     latitudeDelta: 0.01,
                     longitudeDelta: 0.01,
                     }}>
-                    <Marker coordinate={{ latitude: 0, longitude: 0 }}
-                        image={require('../../../assets/pins/pins_bus.png')}>
+                    <Marker coordinate={{ latitude: 0, longitude: 0 }}>
+                        <Image source={require('../../../assets/pins/pins_bus.png')} style={{ width: 40, height: 40 }} />
                     </Marker>
                 </MapView>
             )
