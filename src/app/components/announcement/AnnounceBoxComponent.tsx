@@ -29,7 +29,8 @@ class AnnounceBoxComponent extends React.Component<Props, State> {
         if(date) {
             const newDate = new Date(date)
             const month = newDate.getMonth() + 1
-            return newDate.getFullYear() + '/' + (month > 9 ? month : '0' + month) + '/' + newDate.getDate()
+            const day = newDate.getDate()
+            return newDate.getFullYear() + '/' + (month > 9 ? month : '0' + month) + '/' + (day > 9 ? day : '0' + day)
         }
 
         return ''

@@ -35,7 +35,7 @@ class CardScoreExamComponent extends React.Component<Props, State> {
                 this.state.scoreList.map((item: any, index: number) => {
                     return (
                         <View key={index} style={styles.scoreContain}>
-                            <Text style={styles.textScore}>{item.SCRE_EXAM_DATE}</Text>
+                            <Text style={styles.textScore}>{this.convertDate(item.SCRE_EXAM_DATE)}</Text>
                             <Text style={styles.textScore}>{item.SCRE_SUBJECT}</Text>
                             <Text style={styles.textScore}>{item.SCRE_SCORE}</Text>
                             <Text style={styles.textScore}>{item.SCRE_FULL_MARKS}</Text>
@@ -44,6 +44,17 @@ class CardScoreExamComponent extends React.Component<Props, State> {
                 })
             )
         }
+    }
+
+    convertDate = (date: string) => {
+        if(date) {
+            const newDate = new Date(date)
+            const month = newDate.getMonth() + 1
+            const day = newDate.getDate()
+            return newDate.getFullYear() + '/' + (month > 9 ? month : '0' + month) + '/' + (day > 9 ? day : '0' + day)
+        }
+
+        return ''
     }
 
     render() {
@@ -63,8 +74,8 @@ class CardScoreExamComponent extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        flex: 1,
+        width: '90%',
+        height: 'auto',
         flexDirection: 'column',
         backgroundColor: 'white',
         borderRadius: 30,
@@ -72,9 +83,10 @@ const styles = StyleSheet.create({
     }, scoreContain: {
         width: '100%',
         flexDirection: 'row',
-        flex: 1,
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 10
     }, textScore: {
         color: 'black',
         fontSize: 14,
