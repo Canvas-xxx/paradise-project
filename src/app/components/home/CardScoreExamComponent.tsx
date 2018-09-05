@@ -35,10 +35,10 @@ class CardScoreExamComponent extends React.Component<Props, State> {
                 this.state.scoreList.map((item: any, index: number) => {
                     return (
                         <View key={index} style={styles.scoreContain}>
-                            <Text style={styles.textScore}>{this.convertDate(item.SCRE_EXAM_DATE)}</Text>
-                            <Text style={styles.textScore}>{item.SCRE_SUBJECT}</Text>
-                            <Text style={styles.textScore}>{item.SCRE_SCORE}</Text>
-                            <Text style={styles.textScore}>{item.SCRE_FULL_MARKS}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{this.convertDate(item.SCRE_EXAM_DATE)}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_SUBJECT}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_SCORE}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_FULL_MARKS}</Text>
                         </View>
                     )
                 })
@@ -61,10 +61,10 @@ class CardScoreExamComponent extends React.Component<Props, State> {
         return (
             <View style={styles.container}>
                 <View style={styles.scoreContain}>
-                    <Text style={styles.textHead}>Date</Text>
-                    <Text style={styles.textHead}>Subject</Text>
-                    <Text style={styles.textHead}>Score</Text>
-                    <Text style={styles.textHead}>MaxScore</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>Date</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>Subject</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>Score</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>MaxScore</Text>
                 </View>
                 {this.renderList()}
             </View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }, textScore: {
         color: 'black',
-        fontSize: 14,
+        fontSize: 12,
         flex: 1
     },textHead: {
         color: 'black',
