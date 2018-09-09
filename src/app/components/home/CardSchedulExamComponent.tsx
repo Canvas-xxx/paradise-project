@@ -7,22 +7,22 @@ export interface Props {
 }
 
 interface State {
-    scoreList: any[]
+    schedulList: any[]
 }
 
-class CardScoreExamComponent extends React.Component<Props, State> {
+class CardSchedulExamComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
         this.state = {
-            scoreList: []
+            schedulList: []
         }
     }
 
     unsubscribe: any
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => { return this.setState({ scoreList: store.getState().score }) })
+        this.unsubscribe = store.subscribe(() => { return this.setState({ schedulList: store.getState().schedul }) })
     }
 
     componentWillUnmount() {
@@ -30,15 +30,15 @@ class CardScoreExamComponent extends React.Component<Props, State> {
     }
 
     renderList = () => {
-        if(this.state.scoreList.length > 0) {
+        if(this.state.schedulList.length > 0) {
             return (
-                this.state.scoreList.map((item: any, index: number) => {
+                this.state.schedulList.map((item: any, index: number) => {
                     return (
                         <View key={index} style={styles.scoreContain}>
-                            <Text numberOfLines={1} style={styles.textScore}>{this.convertDate(item.SCRE_EXAM_DATE)}</Text>
-                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_SUBJECT}</Text>
-                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_SCORE}</Text>
-                            <Text numberOfLines={1} style={styles.textScore}>{item.SCRE_FULL_MARKS}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{this.convertDate(item.SCHE_EXAM_DATE)}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCHE_ROUND}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCHE_STU_CLASS}</Text>
+                            <Text numberOfLines={1} style={styles.textScore}>{item.SCHE_SUBJECT}</Text>
                         </View>
                     )
                 })
@@ -62,9 +62,9 @@ class CardScoreExamComponent extends React.Component<Props, State> {
             <View style={styles.container}>
                 <View style={styles.scoreContain}>
                     <Text numberOfLines={1} style={styles.textHead}>Date</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>Round</Text>
+                    <Text numberOfLines={1} style={styles.textHead}>Class</Text>
                     <Text numberOfLines={1} style={styles.textHead}>Subject</Text>
-                    <Text numberOfLines={1} style={styles.textHead}>Score</Text>
-                    <Text numberOfLines={1} style={styles.textHead}>MaxScore</Text>
                 </View>
                 {this.renderList()}
             </View>
@@ -98,4 +98,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CardScoreExamComponent
+export default CardSchedulExamComponent

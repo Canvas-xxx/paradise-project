@@ -11,6 +11,7 @@ import MapTrackingScreen from './screens/homepage/MapTrackingScreen'
 import AnnounceScreen from './screens/announcement/AnnounceScreen'
 import SettingScreen from './screens/setting/SettingScreen'
 import ScoreScreen from './screens/homepage/ScoreScreen'
+import SchedulScreen from './screens/homepage/SchedulScreen'
 
 export interface Props {
 
@@ -95,6 +96,13 @@ class RouterComponent extends React.Component<Props, State> {
                                         titleStyle={{ color: 'white', fontSize: 20 }}
                                         navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
                                     </Scene>
+                                    <Scene key='schedulExam'
+                                        component={SchedulScreen}
+                                        hideNavBar={false}
+                                        title='Schedul Exam'
+                                        titleStyle={{ color: 'white', fontSize: 20 }}
+                                        navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
+                                    </Scene>
                                 </Scene>
                                 <Scene key='announce'
                                     component={AnnounceScreen}
@@ -171,6 +179,13 @@ class RouterComponent extends React.Component<Props, State> {
                                         component={ScoreScreen}
                                         hideNavBar={false}
                                         title='Score Exam'
+                                        titleStyle={{ color: 'white', fontSize: 20 }}
+                                        navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
+                                    </Scene>
+                                    <Scene key='schedulExam'
+                                        component={SchedulScreen}
+                                        hideNavBar={false}
+                                        title='Schedul Exam'
                                         titleStyle={{ color: 'white', fontSize: 20 }}
                                         navigationBarStyle={{ height: 70,backgroundColor: '#e6eaab' }}>
                                     </Scene>

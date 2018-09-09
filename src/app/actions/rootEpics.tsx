@@ -6,6 +6,7 @@ import { fetchStateListEpic } from './epic/stateEpic'
 import { fetchAnnounceEpic } from './epic/announceEpic'
 import { fetchBusLocationEpic } from './epic/busEpic'
 import { fetchScoreExamEpic } from './epic/scoreExamEpic'
+import { fetchSchedulExamEpic } from './epic/schedulExamEpic'
 
 const rootEpics = combineEpics(
     // fetchUserEpic,
@@ -17,7 +18,8 @@ const rootEpics = combineEpics(
     fetchStateListEpic,
     fetchAnnounceEpic,
     fetchBusLocationEpic,
-    fetchScoreExamEpic
+    fetchScoreExamEpic,
+    fetchSchedulExamEpic
 )
 
 export default rootEpics

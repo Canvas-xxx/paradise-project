@@ -70,7 +70,12 @@ class TrackingCardComponent extends React.Component<Props, State> {
                 </View>
                 <View style={styles.body}>
                     <View style={styles.textContain}>
-                        <Button title='Exam schedule' onPress={() => {}} />
+                        <Button title='Exam schedule' onPress={() => {
+                            Actions.schedulExam({
+                                className: this.state.STU_CLASS,
+                                schoolId: this.state.SCH_SEQ_ID
+                            })
+                        }} />
                     </View>
                     <View style={styles.textContain}>
                         <Button title='Exam results' onPress={() => {

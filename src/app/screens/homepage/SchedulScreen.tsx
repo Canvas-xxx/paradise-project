@@ -1,40 +1,37 @@
 import React from 'react'
-import { View, ScrollView, StyleSheet } from 'react-native'
+import { View, ScrollView, StyleSheet }  from 'react-native'
 import store from '../../store'
-import CardScoreExamComponent from '../../components/home/CardScoreExamComponent'
+import CardSchedulExamComponent from '../../components/home/CardSchedulExamComponent'
 
 export interface Props {
-    studentId: string,
     className: string,
     schoolId: string
 }
 
 interface State {
-    studentId: string,
     className: string,
     schoolId: string
 }
 
-class ScoreScreen extends React.Component<Props, State> {
+class SchedulScreen extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
         this.state = {
-            studentId: props.studentId,
             className: props.className,
             schoolId: props.schoolId
         }
     }
 
     componentDidMount() {
-        store.dispatch({ type: 'FETCH_SCORE_EXAM', payload: { studentId: this.state.studentId, className: this.state.className, schoolId: this.state.schoolId } })
+        store.dispatch({ type: 'FETCH_SCHEDUL_EXAM', payload: { className: this.state.className, schoolId: this.state.schoolId } })
     }
 
     render() {
-        return(
+        return (
             <View style={styles.container}>
                 <ScrollView style={styles.scroll}>
-                    <CardScoreExamComponent />
+                    <CardSchedulExamComponent />
                 </ScrollView>
             </View>
         )
@@ -55,4 +52,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ScoreScreen
+export default SchedulScreen
