@@ -51,7 +51,7 @@ class SettingScreen extends React.Component<Props, State> {
     }
 
     deleteSender(id: string, callback: any) {
-        fetch('http://203.121.143.61:8099/deleteSenderID', {
+        fetch('http://103.30.124.135:8099/deleteSenderID', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ class SettingScreen extends React.Component<Props, State> {
     changePassword() {
         AsyncStorage.getItem('user').then( item => {
             const obj: any = JSON.parse(item)
-            fetch('http://203.121.143.61:8099/updateUser', {
+            fetch('http://103.30.124.135:8099/updateUser', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -23,7 +23,7 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
       ofType(FETCH_STATE_LIST),
       mergeMap((payload: any) =>
         // ajax.get(`http://localhost:8099/stateDetail`, {
-        ajax.get(`http://203.121.143.61:8099/stateDetail`, {
+        ajax.get(`http://103.30.124.135:8099/stateDetail`, {
             'Content-Type': 'application/json',
             'studentId': payload.payload.STU_SEQ_ID,
             'schoolId': payload.payload.SCH_SEQ_ID,
@@ -54,7 +54,7 @@ export const fetchStateListEpic: Epic<FluxStandardAction> =action$ =>
 //         ofType(FETCH_STATE),
 //         mergeMap((payload: any) =>
 //           ajax.get(`http://localhost:8099/stateDetail`, {
-//             // ajax.get(`http://203.121.143.61:8099/stateDetail`, {
+//             // ajax.get(`http://103.30.124.135:8099/stateDetail`, {
 //               'Content-Type': 'application/json',
 //               'id': payload.payload.STU_SEQ_ID,
 //           })

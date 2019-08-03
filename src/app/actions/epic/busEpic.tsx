@@ -22,7 +22,7 @@ export const fetchBusLocationEpic: Epic<FluxStandardAction> = action$ =>
     action$.pipe(
         ofType(FETCH_BUS_LOCATION),
         mergeMap((payload: any) =>
-            ajax.get(`http://203.121.143.61:8099/getBusLocation`, {
+            ajax.get(`http://103.30.124.135:8099/getBusLocation`, {
                 'Content-Type': 'application/json',
                 'busId': payload.payload.busId,
                 'schoolId': payload.payload.schoolId

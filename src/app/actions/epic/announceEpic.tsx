@@ -23,7 +23,7 @@ export const fetchAnnounceEpic: Epic<FluxStandardAction> = action$ =>
       ofType(FETCH_ANNOUNCE),
       mergeMap((payload: any) =>
         // ajax.get(`http://localhost:8099/getAnnounce`, {
-        ajax.get(`http://203.121.143.61:8099/getAnnounce`, {
+        ajax.get(`http://103.30.124.135:8099/getAnnounce`, {
             'Content-Type': 'application/json',
             'schoolId': payload.payload.SCH_SEQ_ID
         })

@@ -22,7 +22,7 @@ export const fetchSchedulExamEpic: Epic<FluxStandardAction> = action$ =>
     action$.pipe(
         ofType(FETCH_SCHEDUL_EXAM),
         mergeMap((payload: any) =>
-            ajax.post(`http://203.121.143.61:8099/getScheduExam`, {
+            ajax.post(`http://103.30.124.135:8099/getScheduExam`, {
                 'className': payload.payload.className,
                 'schoolId': payload.payload.schoolId
             })

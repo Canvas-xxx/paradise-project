@@ -39,7 +39,7 @@ class LoginScreen extends React.Component<Props, State> {
     }
 
     public setUser() {
-        fetch('http://203.121.143.61:8099/authenticationLogin', {
+        fetch('http://103.30.124.135:8099/authenticationLogin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

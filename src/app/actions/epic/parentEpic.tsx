@@ -23,7 +23,7 @@ export const fetchParentEpic: Epic<FluxStandardAction> =action$ =>
       ofType(FETCH_PARENT),
       mergeMap((payload: any) =>
         // ajax.get(`http://localhost:8099/parentDetail`, {
-        ajax.get(`http://203.121.143.61:8099/parentDetail`, {
+        ajax.get(`http://103.30.124.135:8099/parentDetail`, {
             'Content-Type': 'application/json',
             'id': payload.payload.USER_PAR_SEQ_ID
         })

@@ -22,7 +22,7 @@ export const fetchScoreExamEpic: Epic<FluxStandardAction> = action$ =>
     action$.pipe(
         ofType(FETCH_SCORE_EXAM),
         mergeMap((payload: any) =>
-            ajax.post(`http://203.121.143.61:8099/getScoreExam`, {
+            ajax.post(`http://103.30.124.135:8099/getScoreExam`, {
                 'studentId': payload.payload.studentId,
                 'className': payload.payload.className,
                 'schoolId': payload.payload.schoolId
